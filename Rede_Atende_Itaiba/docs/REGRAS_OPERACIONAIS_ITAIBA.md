@@ -1,4 +1,4 @@
-# Regras operacionais — Rede Atende 3.12.0
+# Regras operacionais — Rede Atende
 
 Regras acadêmicas para Itaíba–PE, validadas no servidor. Não constituem prazo municipal oficial ou homologação governamental.
 
