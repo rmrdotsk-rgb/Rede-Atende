@@ -1,0 +1,45 @@
+# Dependências, compilação e caches
+node_modules/
+dist/
+build/
+coverage/
+*.tsbuildinfo
+.cache/
+.vite/
+
+# Resultados locais de testes e medições
+test-results/
+playwright-report/
+server-dist/
+docs/evidencias/
+browser-performance.json
+routes-performance.json
+
+# Bancos, dados, uploads, backups e credenciais locais
+.local/
+.env
+.env.*
+!.env.example
+uploads/
+backups/
+*.sqlite
+*.sqlite3
+*.db
+*.db-wal
+*.db-shm
+*.pem
+*.key
+*.p12
+*.pfx
+*demo-access*
+
+# Arquivos gerados, logs, editores, distribuição
+*.log
+npm-debug.log*
+*.zip
+*.bak
+*.tmp
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

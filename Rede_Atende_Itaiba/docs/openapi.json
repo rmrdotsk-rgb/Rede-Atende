@@ -1,0 +1,2436 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Rede Atende API acadêmica",
+    "version": "3.12.0",
+    "description": "Demonstração com dados sintéticos. SEI é simulação. Estado, anexos e notificações exigem autorização por conta."
+  },
+  "servers": [
+    {
+      "url": "/api/v1"
+    }
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Consultar /health",
+        "responses": {
+          "200": {
+            "description": "Operação concluída"
+          },
+          "400": {
+            "description": "Entrada inválida"
+          },
+          "401": {
+            "description": "Sessão obrigatória ou expirada"
+          },
+          "403": {
+            "description": "Perfil, CSRF ou origem não autorizados"
+          },
+          "404": {
+            "description": "Registro não disponível para a conta"
+          },
+          "409": {
+            "description": "Conflito ou chave de idempotência reutilizada"
+          },
+          "422": {
+            "description": "Regra de negócio impede a operação"
+          },
+          "429": {
+            "description": "Limite de tentativas atingido"
+          }
+        }
+      }
+    },
+    "/auth/me": {
+      "get": {
+        "summary": "Consultar /auth/me",
+        "responses": {
+          "200": {
+            "description": "Operação concluída"
+          },
+          "400": {
+            "description": "Entrada inválida"
+          },
+          "401": {
+            "description": "Sessão obrigatória ou expirada"
+          },
+          "403": {
+            "description": "Perfil, CSRF ou origem não autorizados"
+          },
+          "404": {
+            "description": "Registro não disponível para a conta"
+          },
+          "409": {
+            "description": "Conflito ou chave de idempotência reutilizada"
+          },
+          "422": {
+            "description": "Regra de negócio impede a operação"
+          },
+          "429": {
+            "description": "Limite de tentativas atingido"
+          }
+        }
+      }
+    },
+    "/auth/register": {
+      "post": {
+        "summary": "Registrar /auth/register",
+        "responses": {
+          "200": {
+            "description": "Operação concluída"
+          },
+          "201": {
+            "description": "Registro criado"
+          },
+          "400": {
+            "description": "Entrada inválida"
+          },
+          "401": {
+            "description": "Sessão obrigatória ou expirada"
+          },
+          "403": {
+            "description": "Perfil, CSRF ou origem não autorizados"
+          },
+          "404": {
+            "description": "Registro não disponível para a conta"
+          },
+          "409": {
+            "description": "Conflito ou chave de idempotência reutilizada"
+          },
+          "422": {
+            "description": "Regra de negócio impede a operação"
+          },
+          "429": {
+            "description": "Limite de tentativas atingido"
+          }
+        },
+        "parameters": [
+          {
+            "name": "X-Requested-With",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "const": "RedeAtende"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          },
+          "description": "Campos, validações e exemplos em docs/API_REST.md e schemas Zod compartilhados. Valores não previstos são recusados nos endpoints administrativos."
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "summary": "Registrar /auth/login",
+        "responses": {
+          "200": {
+            "description": "Operação concluída"
+          },
+          "400": {
+            "description": "Entrada inválida"
+          },
+          "401": {
+            "description": "Sessão obrigatória ou expirada"
+          },
+          "403": {
+            "description": "Perfil, CSRF ou origem não autorizados"
+          },
+          "404": {
+            "description": "Registro não disponível para a conta"
+          },
+          "409": {
+            "description": "Conflito ou chave de idempotência reutilizada"
+          },
+          "422": {
+            "description": "Regra de negócio impede a operação"
+          },
+          "429": {
+            "description": "Limite de tentativas atingido"
+          }
+        },
+        "parameters": [
+          {
+            "name": "X-Requested-With",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "const": "RedeAtende"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          },
+          "description": "Campos, validações e exemplos em docs/API_REST.md e schemas Zod compartilhados. Valores não previstos são recusados nos endpoints administrativos."
+        }
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "summary": "Registrar /auth/logout",
+        "responses": {
+          "200": {
+            "description": "Operação concluída"
+          },
+          "400": {
+            "description": "Entrada inválida"
+          },
+          "401": {
+            "description": "Sessão obrigatória ou expirada"
+          },
+          "403": {
+            "description": "Perfil, CSRF ou origem não autorizados"
+          },
+          "404": {
+            "description": "Registro não disponível para a conta"
+          },
+          "409": {
+            "description": "Conflito ou chave de idempotência reutilizada"
+          },
+          "422": {
+            "description": "Regra de negócio impede a operação"
+          },
+          "429": {
+            "description": "Limite de tentativas atingido"
+          }
+        },
+        "security": [
+          {
+            "session": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "X-Requested-With",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "const": "RedeAtende"
+            }
+          },
+          {
+            "name": "X-CSRF-Token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          },
+          "description": "Campos, validações e exemplos em docs/API_REST.md e schemas Zod compartilhados. Valores não previstos são recusados nos endpoints administrativos."
+        }
+      }
+    },
+    "/state": {
+      "get": {
+        "summary": "Consultar /state",
+        "responses": {
+          "200": {
+            "description": "Operação concluída"
+          },
+          "400": {
+            "description": "Entrada inválida"
+          },
+          "401": {
+            "description": "Sessão obrigatória ou expirada"
+          },
+          "403": {
+            "description": "Perfil, CSRF ou origem não autorizados"
+          },
+          "404": {
+            "description": "Registro não disponível para a conta"
+          },
+          "409": {
+            "description": "Conflito ou chave de idempotência reutilizada"
+          },
+          "422": {
+            "description": "Regra de negócio impede a operação"
+          },
+          "429": {
+            "description": "Limite de tentativas atingido"
+          }
+        }
+      }
+    },
+    "/schools": {
+      "get": {
+        "summary": "Consultar /schools",
+        "responses": {
+          "200": {
+            "description": "Operação concluída"
+          },
+          "400": {
+            "description": "Entrada inválida"
+          },
+          "401": {
+            "description": "Sessão obrigatória ou expirada"
+          },
+          "403": {
+            "description": "Perfil, CSRF ou origem não autorizados"
+          },
+          "404": {
+            "description": "Registro não disponível para a conta"
+          },
+          "409": {
+            "description": "Conflito ou chave de idempotência reutilizada"
+          },
+          "422": {
+            "description": "Regra de negócio impede a operação"
+          },
+          "429": {
+            "description": "Limite de tentativas atingido"
+          }
+        }
+      }
+    },
+    "/requests": {
+      "get": {
+        "summary": "Consultar /requests",
+        "responses": {
+          "200": {
+            "description": "Operação concluída"
+          },
+          "400": {
+            "description": "Entrada inválida"
+          },
+          "401": {
+            "description": "Sessão obrigatória ou expirada"
+          },
+          "403": {
+            "description": "Perfil, CSRF ou origem não autorizados"
+          },
+          "404": {
+            "description": "Registro não disponível para a conta"
+          },
+          "409": {
+            "description": "Conflito ou chave de idempotência reutilizada"
+          },
+          "422": {
+            "description": "Regra de negócio impede a operação"
+          },
+          "429": {
+            "description": "Limite de tentativas atingido"
+          }
+        },
+        "security": [
+          {
+            "session": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "Registrar /requests",
+        "responses": {
+          "200": {
+            "description": "Operação concluída"
+          },
+          "201": {
+            "description": "Registro criado"
+          },
+          "400": {
+            "description": "Entrada inválida"
+          },
+          "401": {
+            "description": "Sessão obrigatória ou expirada"
+          },
+          "403": {
+            "description": "Perfil, CSRF ou origem não autorizados"
+          },
+          "404": {
+            "description": "Registro não disponível para a conta"
+          },
+          "409": {
+            "description": "Conflito ou chave de idempotência reutilizada"
+          },
+          "422": {
+            "description": "Regra de negócio impede a operação"
+          },
+          "429": {
+            "description": "Limite de tentativas atingido"
+          }
+        },
+        "security": [
+          {
+            "session": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "X-Requested-With",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "const": "RedeAtende"
+            }
+          },
+          {
+            "name": "X-CSRF-Token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 16,
+              "maxLength": 150
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          },
+          "description": "Campos, validações e exemplos em docs/API_REST.md e schemas Zod compartilhados. Valores não previstos são recusados nos endpoints administrativos."
+        },
+        "description": "Somente cidadão. Prioridade inicial média definida no servidor, mesmo se o cliente enviar alta/urgente."
+      }
+    },
+    "/requests/{id}": {
+      "get": {
+        "summary": "Consultar /requests/{id}",
+        "responses": {
+          "200": {
+            "description": "Operação concluída"
+          },
+          "400": {
+            "description": "Entrada inválida"
+          },
+          "401": {
+            "description": "Sessão obrigatória ou expirada"
+          },
+          "403": {
+            "description": "Perfil, CSRF ou origem não autorizados"
+          },
+          "404": {
+            "description": "Registro não disponível para a conta"
+          },
+          "409": {
+            "description": "Conflito ou chave de idempotência reutilizada"
+          },
+          "422": {
+            "description": "Regra de negócio impede a operação"
+          },
+          "429": {
+            "description": "Limite de tentativas atingido"
+          }
+        },
+        "security": [
+          {
+            "session": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "patch": {
+        "summary": "Atualizar /requests/{id}",
+        "responses": {
+          "200": {
+            "description": "Operação concluída"
+          },
+          "400": {
+            "description": "Entrada inválida"
+          },
+          "401": {
+            "description": "Sessão obrigatória ou expirada"
+          },
+          "403": {
+            "description": "Perfil, CSRF ou origem não autorizados"
+          },
+          "404": {
+            "description": "Registro não disponível para a conta"
+          },
+          "409": {
+            "description": "Conflito ou chave de idempotência reutilizada"
+          },
+          "422": {
+            "description": "Regra de negócio impede a operação"
+          },
+          "429": {
+            "description": "Limite de tentativas atingido"
+          }
+        },
+        "security": [
+          {
+            "session": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Requested-With",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "const": "RedeAtende"
+            }
+          },
+          {
+            "name": "X-CSRF-Token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          },
+          "description": "Despacho autorizado de gestor/operador. Categoria e categoryDetails podem ser corrigidos juntos, com options.categoryReason (5–2000 caracteres) e expectedUpdatedAt obrigatórios. Prazo e encaminhamento são preservados salvo alteração explícita com motivo. Versão divergente: 409. Demanda concluída precisa ser reaberta por gestor antes da correção. Campos e exemplos em docs/API_REST.md."
+        }
+      }
+    },
+    "/protocols/{protocol}": {
+      "get": {
+        "summary": "Consultar /protocols/{protocol}",
+        "responses": {
+          "200": {
+            "description": "Operação concluída"
+          },
+          "400": {
+            "description": "Entrada inválida"
+          },
+          "401": {
+            "description": "Sessão obrigatória ou expirada"
+          },
+          "403": {
+            "description": "Perfil, CSRF ou origem não autorizados"
+          },
+          "404": {
+            "description": "Registro não disponível para a conta"
+          },
+          "409": {
+            "description": "Conflito ou chave de idempotência reutilizada"
+          },
+          "422": {
+            "description": "Regra de negócio impede a operação"
+          },
+          "429": {
+            "description": "Limite de tentativas atingido"
+          }
+        },
+        "security": [
+          {
+            "session": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "protocol",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/requests/{id}/replies": {
+      "post": {
+        "summary": "Registrar /requests/{id}/replies",
+        "responses": {
+          "200": {
+            "description": "Operação concluída"
+          },
+          "400": {
+            "description": "Entrada inválida"
+          },
+          "401": {
+            "description": "Sessão obrigatória ou expirada"
+          },
+          "403": {
+            "description": "Perfil, CSRF ou origem não autorizados"
+          },
+          "404": {
+            "description": "Registro não disponível para a conta"
+          },
+          "409": {
+            "description": "Conflito ou chave de idempotência reutilizada"
+          },
+          "422": {
+            "description": "Regra de negócio impede a operação"
+          },
+          "429": {
+            "description": "Limite de tentativas atingido"
+          }
+        },
+        "security": [
+          {
+            "session": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Requested-With",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "const": "RedeAtende"
+            }
+          },
+          {
+            "name": "X-CSRF-Token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          },
+          "description": "Campos, validações e exemplos em docs/API_REST.md e schemas Zod compartilhados. Valores não previstos são recusados nos endpoints administrativos."
+        }
+      }
+    },
+    "/requests/{id}/rating": {
+      "post": {
+        "summary": "Registrar /requests/{id}/rating",
+        "responses": {
+          "200": {
+            "description": "Operação concluída"
+          },
+          "400": {
+            "description": "Entrada inválida"
+          },
+          "401": {
+            "description": "Sessão obrigatória ou expirada"
+          },
+          "403": {
+            "description": "Perfil, CSRF ou origem não autorizados"
+          },
+          "404": {
+            "description": "Registro não disponível para a conta"
+          },
+          "409": {
+            "description": "Conflito ou chave de idempotência reutilizada"
+          },
+          "422": {
+            "description": "Regra de negócio impede a operação"
+          },
+          "429": {
+            "description": "Limite de tentativas atingido"
+          }
+        },
+        "security": [
+          {
+            "session": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Requested-With",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "const": "RedeAtende"
+            }
+          },
+          {
+            "name": "X-CSRF-Token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          },
+          "description": "Campos, validações e exemplos em docs/API_REST.md e schemas Zod compartilhados. Valores não previstos são recusados nos endpoints administrativos."
+        }
+      }
+    },
+    "/requests/{id}/sei-simulation": {
+      "post": {
+        "summary": "Registrar /requests/{id}/sei-simulation",
+        "responses": {
+          "200": {
+            "description": "Operação concluída"
+          },
+          "400": {
+            "description": "Entrada inválida"
+          },
+          "401": {
+            "description": "Sessão obrigatória ou expirada"
+          },
+          "403": {
+            "description": "Perfil, CSRF ou origem não autorizados"
+          },
+          "404": {
+            "description": "Registro não disponível para a conta"
+          },
+          "409": {
+            "description": "Conflito ou chave de idempotência reutilizada"
+          },
+          "422": {
+            "description": "Regra de negócio impede a operação"
+          },
+          "429": {
+            "description": "Limite de tentativas atingido"
+          }
+        },
+        "security": [
+          {
+            "session": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Requested-With",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "const": "RedeAtende"
+            }
+          },
+          {
+            "name": "X-CSRF-Token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          },
+          "description": "Campos, validações e exemplos em docs/API_REST.md e schemas Zod compartilhados. Valores não previstos são recusados nos endpoints administrativos."
+        }
+      }
+    },
+    "/work-orders": {
+      "get": {
+        "summary": "Consultar /work-orders",
+        "responses": {
+          "200": {
+            "description": "Operação concluída"
+          },
+          "400": {
+            "description": "Entrada inválida"
+          },
+          "401": {
+            "description": "Sessão obrigatória ou expirada"
+          },
+          "403": {
+            "description": "Perfil, CSRF ou origem não autorizados"
+          },
+          "404": {
+            "description": "Registro não disponível para a conta"
+          },
+          "409": {
+            "description": "Conflito ou chave de idempotência reutilizada"
+          },
+          "422": {
+            "description": "Regra de negócio impede a operação"
+          },
+          "429": {
+            "description": "Limite de tentativas atingido"
+          }
+        },
+        "security": [
+          {
+            "session": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "Registrar /work-orders",
+        "responses": {
+          "200": {
+            "description": "Operação concluída"
+          },
+          "400": {
+            "description": "Entrada inválida"
+          },
+          "401": {
+            "description": "Sessão obrigatória ou expirada"
+          },
+          "403": {
+            "description": "Perfil, CSRF ou origem não autorizados"
+          },
+          "404": {
+            "description": "Registro não disponível para a conta"
+          },
+          "409": {
+            "description": "Conflito ou chave de idempotência reutilizada"
+          },
+          "422": {
+            "description": "Regra de negócio impede a operação"
+          },
+          "429": {
+            "description": "Limite de tentativas atingido"
+          }
+        },
+        "security": [
+          {
+            "session": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "X-Requested-With",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "const": "RedeAtende"
+            }
+          },
+          {
+            "name": "X-CSRF-Token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": false,
+            "description": "A UI 3.8 sempre envia; sem chave mantém criação legada. Mesmo conteúdo/chave reconcilia, conteúdo diferente gera 409.",
+            "schema": {
+              "type": "string",
+              "minLength": 16,
+              "maxLength": 150
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          },
+          "description": "Campos, validações e exemplos em docs/API_REST.md e schemas Zod compartilhados. Valores não previstos são recusados nos endpoints administrativos."
+        }
+      }
+    },
+    "/work-orders/{id}": {
+      "patch": {
+        "summary": "Atualizar /work-orders/{id}",
+        "responses": {
+          "200": {
+            "description": "Operação concluída"
+          },
+          "400": {
+            "description": "Entrada inválida"
+          },
+          "401": {
+            "description": "Sessão obrigatória ou expirada"
+          },
+          "403": {
+            "description": "Perfil, CSRF ou origem não autorizados"
+          },
+          "404": {
+            "description": "Registro não disponível para a conta"
+          },
+          "409": {
+            "description": "Conflito ou chave de idempotência reutilizada"
+          },
+          "422": {
+            "description": "Regra de negócio impede a operação"
+          },
+          "429": {
+            "description": "Limite de tentativas atingido"
+          }
+        },
+        "security": [
+          {
+            "session": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Requested-With",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "const": "RedeAtende"
+            }
+          },
+          {
+            "name": "X-CSRF-Token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          },
+          "description": "Campos, validações e exemplos em docs/API_REST.md e schemas Zod compartilhados. Valores não previstos são recusados nos endpoints administrativos."
+        }
+      },
+      "get": {
+        "summary": "Consultar detalhe autorizado de uma OS",
+        "security": [
+          {
+            "session": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalhe ou projeção do titular"
+          },
+          "401": {
+            "description": "Sessão exigida"
+          },
+          "404": {
+            "description": "Não encontrado para esta conta"
+          }
+        }
+      }
+    },
+    "/appointments": {
+      "get": {
+        "summary": "Consultar /appointments",
+        "responses": {
+          "200": {
+            "description": "Operação concluída"
+          },
+          "400": {
+            "description": "Entrada inválida"
+          },
+          "401": {
+            "description": "Sessão obrigatória ou expirada"
+          },
+          "403": {
+            "description": "Perfil, CSRF ou origem não autorizados"
+          },
+          "404": {
+            "description": "Registro não disponível para a conta"
+          },
+          "409": {
+            "description": "Conflito ou chave de idempotência reutilizada"
+          },
+          "422": {
+            "description": "Regra de negócio impede a operação"
+          },
+          "429": {
+            "description": "Limite de tentativas atingido"
+          }
+        },
+        "security": [
+          {
+            "session": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "Registrar /appointments",
+        "responses": {
+          "200": {
+            "description": "Operação concluída"
+          },
+          "400": {
+            "description": "Entrada inválida"
+          },
+          "401": {
+            "description": "Sessão obrigatória ou expirada"
+          },
+          "403": {
+            "description": "Perfil, CSRF ou origem não autorizados"
+          },
+          "404": {
+            "description": "Registro não disponível para a conta"
+          },
+          "409": {
+            "description": "Conflito ou chave de idempotência reutilizada"
+          },
+          "422": {
+            "description": "Regra de negócio impede a operação"
+          },
+          "429": {
+            "description": "Limite de tentativas atingido"
+          }
+        },
+        "security": [
+          {
+            "session": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "X-Requested-With",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "const": "RedeAtende"
+            }
+          },
+          {
+            "name": "X-CSRF-Token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": false,
+            "description": "A UI 3.8 sempre envia; sem chave mantém criação legada. Mesmo conteúdo/chave reconcilia, conteúdo diferente gera 409.",
+            "schema": {
+              "type": "string",
+              "minLength": 16,
+              "maxLength": 150
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          },
+          "description": "Campos, validações e exemplos em docs/API_REST.md e schemas Zod compartilhados. Valores não previstos são recusados nos endpoints administrativos."
+        }
+      }
+    },
+    "/appointments/{id}": {
+      "patch": {
+        "summary": "Atualizar /appointments/{id}",
+        "responses": {
+          "200": {
+            "description": "Operação concluída"
+          },
+          "400": {
+            "description": "Entrada inválida"
+          },
+          "401": {
+            "description": "Sessão obrigatória ou expirada"
+          },
+          "403": {
+            "description": "Perfil, CSRF ou origem não autorizados"
+          },
+          "404": {
+            "description": "Registro não disponível para a conta"
+          },
+          "409": {
+            "description": "Conflito ou chave de idempotência reutilizada"
+          },
+          "422": {
+            "description": "Regra de negócio impede a operação"
+          },
+          "429": {
+            "description": "Limite de tentativas atingido"
+          }
+        },
+        "security": [
+          {
+            "session": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Requested-With",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "const": "RedeAtende"
+            }
+          },
+          {
+            "name": "X-CSRF-Token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "cancellationReason"
+                    ],
+                    "properties": {
+                      "cancellationReason": {
+                        "type": "string",
+                        "minLength": 5,
+                        "maxLength": 2000
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "requestId": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "schoolId": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string",
+                        "minLength": 3,
+                        "maxLength": 150
+                      },
+                      "technician": {
+                        "type": "string",
+                        "minLength": 3,
+                        "maxLength": 120
+                      },
+                      "date": {
+                        "type": "string",
+                        "format": "date"
+                      },
+                      "time": {
+                        "type": "string",
+                        "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$"
+                      },
+                      "status": {
+                        "type": "string",
+                        "enum": [
+                          "Agendada",
+                          "Confirmada",
+                          "Realizada",
+                          "Cancelada"
+                        ]
+                      },
+                      "notes": {
+                        "type": [
+                          "string",
+                          "null"
+                        ],
+                        "maxLength": 2000
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "description": "Edição de agenda ou cancelamento isolado com cancellationReason (5–2000 caracteres). O motivo separado preserva notes. Não combine cancellationReason com outras alterações. PATCH legado status=Cancelada com notes mantém a semântica anterior."
+        }
+      }
+    },
+    "/notifications": {
+      "get": {
+        "summary": "Consultar /notifications",
+        "responses": {
+          "200": {
+            "description": "Operação concluída"
+          },
+          "400": {
+            "description": "Entrada inválida"
+          },
+          "401": {
+            "description": "Sessão obrigatória ou expirada"
+          },
+          "403": {
+            "description": "Perfil, CSRF ou origem não autorizados"
+          },
+          "404": {
+            "description": "Registro não disponível para a conta"
+          },
+          "409": {
+            "description": "Conflito ou chave de idempotência reutilizada"
+          },
+          "422": {
+            "description": "Regra de negócio impede a operação"
+          },
+          "429": {
+            "description": "Limite de tentativas atingido"
+          }
+        },
+        "security": [
+          {
+            "session": []
+          }
+        ]
+      }
+    },
+    "/notifications/{id}/read": {
+      "post": {
+        "summary": "Registrar /notifications/{id}/read",
+        "responses": {
+          "200": {
+            "description": "Operação concluída"
+          },
+          "400": {
+            "description": "Entrada inválida"
+          },
+          "401": {
+            "description": "Sessão obrigatória ou expirada"
+          },
+          "403": {
+            "description": "Perfil, CSRF ou origem não autorizados"
+          },
+          "404": {
+            "description": "Registro não disponível para a conta"
+          },
+          "409": {
+            "description": "Conflito ou chave de idempotência reutilizada"
+          },
+          "422": {
+            "description": "Regra de negócio impede a operação"
+          },
+          "429": {
+            "description": "Limite de tentativas atingido"
+          }
+        },
+        "security": [
+          {
+            "session": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Requested-With",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "const": "RedeAtende"
+            }
+          },
+          {
+            "name": "X-CSRF-Token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          },
+          "description": "Campos, validações e exemplos em docs/API_REST.md e schemas Zod compartilhados. Valores não previstos são recusados nos endpoints administrativos."
+        }
+      }
+    },
+    "/deadline-rules": {
+      "get": {
+        "summary": "Consultar /deadline-rules",
+        "responses": {
+          "200": {
+            "description": "Operação concluída"
+          },
+          "400": {
+            "description": "Entrada inválida"
+          },
+          "401": {
+            "description": "Sessão obrigatória ou expirada"
+          },
+          "403": {
+            "description": "Perfil, CSRF ou origem não autorizados"
+          },
+          "404": {
+            "description": "Registro não disponível para a conta"
+          },
+          "409": {
+            "description": "Conflito ou chave de idempotência reutilizada"
+          },
+          "422": {
+            "description": "Regra de negócio impede a operação"
+          },
+          "429": {
+            "description": "Limite de tentativas atingido"
+          }
+        },
+        "security": [
+          {
+            "session": []
+          }
+        ]
+      },
+      "put": {
+        "summary": "Configurar /deadline-rules",
+        "responses": {
+          "200": {
+            "description": "Operação concluída"
+          },
+          "400": {
+            "description": "Entrada inválida"
+          },
+          "401": {
+            "description": "Sessão obrigatória ou expirada"
+          },
+          "403": {
+            "description": "Perfil, CSRF ou origem não autorizados"
+          },
+          "404": {
+            "description": "Registro não disponível para a conta"
+          },
+          "409": {
+            "description": "Conflito ou chave de idempotência reutilizada"
+          },
+          "422": {
+            "description": "Regra de negócio impede a operação"
+          },
+          "429": {
+            "description": "Limite de tentativas atingido"
+          }
+        },
+        "security": [
+          {
+            "session": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "X-Requested-With",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "const": "RedeAtende"
+            }
+          },
+          {
+            "name": "X-CSRF-Token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          },
+          "description": "Campos, validações e exemplos em docs/API_REST.md e schemas Zod compartilhados. Valores não previstos são recusados nos endpoints administrativos."
+        }
+      }
+    },
+    "/holidays": {
+      "put": {
+        "summary": "Configurar /holidays",
+        "responses": {
+          "200": {
+            "description": "Operação concluída"
+          },
+          "400": {
+            "description": "Entrada inválida"
+          },
+          "401": {
+            "description": "Sessão obrigatória ou expirada"
+          },
+          "403": {
+            "description": "Perfil, CSRF ou origem não autorizados"
+          },
+          "404": {
+            "description": "Registro não disponível para a conta"
+          },
+          "409": {
+            "description": "Conflito ou chave de idempotência reutilizada"
+          },
+          "422": {
+            "description": "Regra de negócio impede a operação"
+          },
+          "429": {
+            "description": "Limite de tentativas atingido"
+          }
+        },
+        "security": [
+          {
+            "session": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "X-Requested-With",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "const": "RedeAtende"
+            }
+          },
+          {
+            "name": "X-CSRF-Token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          },
+          "description": "Campos, validações e exemplos em docs/API_REST.md e schemas Zod compartilhados. Valores não previstos são recusados nos endpoints administrativos."
+        }
+      }
+    },
+    "/schools/{id}": {
+      "patch": {
+        "summary": "Atualizar /schools/{id}",
+        "responses": {
+          "200": {
+            "description": "Operação concluída"
+          },
+          "400": {
+            "description": "Entrada inválida"
+          },
+          "401": {
+            "description": "Sessão obrigatória ou expirada"
+          },
+          "403": {
+            "description": "Perfil, CSRF ou origem não autorizados"
+          },
+          "404": {
+            "description": "Registro não disponível para a conta"
+          },
+          "409": {
+            "description": "Conflito ou chave de idempotência reutilizada"
+          },
+          "422": {
+            "description": "Regra de negócio impede a operação"
+          },
+          "429": {
+            "description": "Limite de tentativas atingido"
+          }
+        },
+        "security": [
+          {
+            "session": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Requested-With",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "const": "RedeAtende"
+            }
+          },
+          {
+            "name": "X-CSRF-Token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          },
+          "description": "Campos, validações e exemplos em docs/API_REST.md e schemas Zod compartilhados. Valores não previstos são recusados nos endpoints administrativos."
+        }
+      }
+    },
+    "/reports": {
+      "get": {
+        "summary": "Consultar /reports",
+        "responses": {
+          "200": {
+            "description": "Operação concluída"
+          },
+          "400": {
+            "description": "Entrada inválida"
+          },
+          "401": {
+            "description": "Sessão obrigatória ou expirada"
+          },
+          "403": {
+            "description": "Perfil, CSRF ou origem não autorizados"
+          },
+          "404": {
+            "description": "Registro não disponível para a conta"
+          },
+          "409": {
+            "description": "Conflito ou chave de idempotência reutilizada"
+          },
+          "422": {
+            "description": "Regra de negócio impede a operação"
+          },
+          "429": {
+            "description": "Limite de tentativas atingido"
+          }
+        },
+        "security": [
+          {
+            "session": []
+          }
+        ]
+      }
+    },
+    "/reports.csv": {
+      "get": {
+        "summary": "Consultar /reports.csv",
+        "responses": {
+          "200": {
+            "description": "Operação concluída"
+          },
+          "400": {
+            "description": "Entrada inválida"
+          },
+          "401": {
+            "description": "Sessão obrigatória ou expirada"
+          },
+          "403": {
+            "description": "Perfil, CSRF ou origem não autorizados"
+          },
+          "404": {
+            "description": "Registro não disponível para a conta"
+          },
+          "409": {
+            "description": "Conflito ou chave de idempotência reutilizada"
+          },
+          "422": {
+            "description": "Regra de negócio impede a operação"
+          },
+          "429": {
+            "description": "Limite de tentativas atingido"
+          }
+        },
+        "security": [
+          {
+            "session": []
+          }
+        ]
+      }
+    },
+    "/audit": {
+      "get": {
+        "summary": "Consultar /audit",
+        "responses": {
+          "200": {
+            "description": "Operação concluída"
+          },
+          "400": {
+            "description": "Entrada inválida"
+          },
+          "401": {
+            "description": "Sessão obrigatória ou expirada"
+          },
+          "403": {
+            "description": "Perfil, CSRF ou origem não autorizados"
+          },
+          "404": {
+            "description": "Registro não disponível para a conta"
+          },
+          "409": {
+            "description": "Conflito ou chave de idempotência reutilizada"
+          },
+          "422": {
+            "description": "Regra de negócio impede a operação"
+          },
+          "429": {
+            "description": "Limite de tentativas atingido"
+          }
+        },
+        "security": [
+          {
+            "session": []
+          }
+        ]
+      }
+    },
+    "/admin/scenarios": {
+      "post": {
+        "summary": "Registrar /admin/scenarios",
+        "responses": {
+          "200": {
+            "description": "Operação concluída"
+          },
+          "400": {
+            "description": "Entrada inválida"
+          },
+          "401": {
+            "description": "Sessão obrigatória ou expirada"
+          },
+          "403": {
+            "description": "Perfil, CSRF ou origem não autorizados"
+          },
+          "404": {
+            "description": "Registro não disponível para a conta"
+          },
+          "409": {
+            "description": "Conflito ou chave de idempotência reutilizada"
+          },
+          "422": {
+            "description": "Regra de negócio impede a operação"
+          },
+          "429": {
+            "description": "Limite de tentativas atingido"
+          }
+        },
+        "security": [
+          {
+            "session": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "X-Requested-With",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "const": "RedeAtende"
+            }
+          },
+          {
+            "name": "X-CSRF-Token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          },
+          "description": "Campos, validações e exemplos em docs/API_REST.md e schemas Zod compartilhados. Valores não previstos são recusados nos endpoints administrativos."
+        }
+      }
+    },
+    "/admin/backup": {
+      "get": {
+        "summary": "Consultar /admin/backup",
+        "responses": {
+          "200": {
+            "description": "Operação concluída"
+          },
+          "400": {
+            "description": "Entrada inválida"
+          },
+          "401": {
+            "description": "Sessão obrigatória ou expirada"
+          },
+          "403": {
+            "description": "Perfil, CSRF ou origem não autorizados"
+          },
+          "404": {
+            "description": "Registro não disponível para a conta"
+          },
+          "409": {
+            "description": "Conflito ou chave de idempotência reutilizada"
+          },
+          "422": {
+            "description": "Regra de negócio impede a operação"
+          },
+          "429": {
+            "description": "Limite de tentativas atingido"
+          }
+        },
+        "security": [
+          {
+            "session": []
+          }
+        ]
+      }
+    },
+    "/admin/import": {
+      "post": {
+        "summary": "Registrar /admin/import",
+        "responses": {
+          "200": {
+            "description": "Operação concluída"
+          },
+          "400": {
+            "description": "Entrada inválida"
+          },
+          "401": {
+            "description": "Sessão obrigatória ou expirada"
+          },
+          "403": {
+            "description": "Perfil, CSRF ou origem não autorizados"
+          },
+          "404": {
+            "description": "Registro não disponível para a conta"
+          },
+          "409": {
+            "description": "Conflito ou chave de idempotência reutilizada"
+          },
+          "422": {
+            "description": "Regra de negócio impede a operação"
+          },
+          "429": {
+            "description": "Limite de tentativas atingido"
+          }
+        },
+        "security": [
+          {
+            "session": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "X-Requested-With",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "const": "RedeAtende"
+            }
+          },
+          {
+            "name": "X-CSRF-Token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          },
+          "description": "Campos, validações e exemplos em docs/API_REST.md e schemas Zod compartilhados. Valores não previstos são recusados nos endpoints administrativos."
+        }
+      }
+    },
+    "/requests/{id}/attachments": {
+      "post": {
+        "summary": "Registrar /requests/{id}/attachments",
+        "responses": {
+          "201": {
+            "description": "Anexo gravado ou replay reconciliado"
+          },
+          "400": {
+            "description": "Entrada inválida"
+          },
+          "401": {
+            "description": "Sessão obrigatória ou expirada"
+          },
+          "403": {
+            "description": "Perfil, CSRF ou origem não autorizados"
+          },
+          "404": {
+            "description": "Registro não disponível para a conta"
+          },
+          "409": {
+            "description": "Conflito ou chave de idempotência reutilizada"
+          },
+          "422": {
+            "description": "Regra de negócio impede a operação"
+          },
+          "429": {
+            "description": "Limite de tentativas atingido"
+          }
+        },
+        "security": [
+          {
+            "session": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Requested-With",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "const": "RedeAtende"
+            }
+          },
+          {
+            "name": "X-CSRF-Token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 16,
+              "maxLength": 150
+            },
+            "description": "Preserve a chave para retry da mesma operação."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "file"
+                ],
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "201 na criação ou replay idêntico. Chave escopada por conta/solicitação. Clientes anteriores sem cabeçalho reconciliam conteúdo e metadados iguais; não somente nome."
+      }
+    },
+    "/attachments/{id}": {
+      "get": {
+        "summary": "Consultar /attachments/{id}",
+        "responses": {
+          "200": {
+            "description": "Operação concluída"
+          },
+          "400": {
+            "description": "Entrada inválida"
+          },
+          "401": {
+            "description": "Sessão obrigatória ou expirada"
+          },
+          "403": {
+            "description": "Perfil, CSRF ou origem não autorizados"
+          },
+          "404": {
+            "description": "Registro não disponível para a conta"
+          },
+          "409": {
+            "description": "Conflito ou chave de idempotência reutilizada"
+          },
+          "422": {
+            "description": "Regra de negócio impede a operação"
+          },
+          "429": {
+            "description": "Limite de tentativas atingido"
+          }
+        },
+        "security": [
+          {
+            "session": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/openapi.json": {
+      "get": {
+        "summary": "Consultar /openapi.json",
+        "responses": {
+          "200": {
+            "description": "Operação concluída"
+          },
+          "400": {
+            "description": "Entrada inválida"
+          },
+          "401": {
+            "description": "Sessão obrigatória ou expirada"
+          },
+          "403": {
+            "description": "Perfil, CSRF ou origem não autorizados"
+          },
+          "404": {
+            "description": "Registro não disponível para a conta"
+          },
+          "409": {
+            "description": "Conflito ou chave de idempotência reutilizada"
+          },
+          "422": {
+            "description": "Regra de negócio impede a operação"
+          },
+          "429": {
+            "description": "Limite de tentativas atingido"
+          }
+        }
+      }
+    },
+    "/requests/search": {
+      "get": {
+        "summary": "Buscar solicitações com filtros SQL e paginação",
+        "responses": {
+          "200": {
+            "description": "Página autorizada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "items",
+                    "total",
+                    "page",
+                    "pageSize",
+                    "pages"
+                  ],
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "total": {
+                      "type": "integer"
+                    },
+                    "page": {
+                      "type": "integer"
+                    },
+                    "pageSize": {
+                      "type": "integer"
+                    },
+                    "pages": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Entrada inválida"
+          },
+          "401": {
+            "description": "Sessão obrigatória ou expirada"
+          },
+          "403": {
+            "description": "Perfil, CSRF ou origem não autorizados"
+          },
+          "404": {
+            "description": "Registro não disponível para a conta"
+          },
+          "409": {
+            "description": "Conflito ou chave de idempotência reutilizada"
+          },
+          "422": {
+            "description": "Regra de negócio impede a operação"
+          },
+          "429": {
+            "description": "Limite de tentativas atingido"
+          }
+        },
+        "security": [
+          {
+            "session": []
+          }
+        ],
+        "description": "Escopo autorizado por conta/perfil. GET /requests sem paginação continua retornando array.",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "description": "Página, mínimo 1.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000000,
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "description": "Itens por página: 1–100, padrão 20.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "description": "Protocolo, assunto, solicitante ou escola.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "required": false,
+            "description": "Categoria do catálogo.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "description": "Situação.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "priority",
+            "in": "query",
+            "required": false,
+            "description": "Prioridade.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "schoolId",
+            "in": "query",
+            "required": false,
+            "description": "Identificador da escola.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "department",
+            "in": "query",
+            "required": false,
+            "description": "Setor do catálogo ou unassigned.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "technician",
+            "in": "query",
+            "required": false,
+            "description": "Parte do responsável; exclusivo da equipe.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "zone",
+            "in": "query",
+            "required": false,
+            "description": "urbana ou rural.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sla",
+            "in": "query",
+            "required": false,
+            "description": "overdue.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "description": "Data inicial AAAA-MM-DD, Recife.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "required": false,
+            "description": "Data final inclusiva AAAA-MM-DD, Recife.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "description": "newest ou oldest.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "view",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "full",
+                "summary"
+              ],
+              "default": "full"
+            }
+          },
+          {
+            "name": "statuses",
+            "in": "query",
+            "description": "Situações separadas por vírgula, filtradas antes da paginação; até seis valores do catálogo.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sei",
+            "in": "query",
+            "description": "Somente equipe: eligible ou integrated. Elegibilidade segue a regra de negócio; não envia dados ao SEI.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/bootstrap": {
+      "get": {
+        "summary": "Consultar projeção limitada da tela e perfil",
+        "description": "Catálogo público em home; demais dados exigem sessão. Listas de resumos paginadas e detalhe explícito; ver API_REST.md. Em integrations, requests contém apenas elegíveis; integratedRequests e seiLogs são páginas independentes, com totais globais em integrationTotals.",
+        "parameters": [
+          {
+            "name": "view",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "home",
+                "dashboard",
+                "demands",
+                "triage",
+                "orders",
+                "agenda",
+                "deadlines",
+                "reports",
+                "integrations",
+                "schools",
+                "track"
+              ],
+              "default": "home"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "name": "requestId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "protocol",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "maxLength": 150
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "eligiblePage",
+            "in": "query",
+            "description": "Página independente em view=integrations.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000000,
+              "default": 1
+            }
+          },
+          {
+            "name": "integratedPage",
+            "in": "query",
+            "description": "Página independente em view=integrations.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000000,
+              "default": 1
+            }
+          },
+          {
+            "name": "logPage",
+            "in": "query",
+            "description": "Página independente em view=integrations.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000000,
+              "default": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Projeção autorizada"
+          },
+          "400": {
+            "description": "Entrada inválida"
+          },
+          "401": {
+            "description": "Sessão exigida"
+          },
+          "403": {
+            "description": "Perfil sem acesso"
+          },
+          "404": {
+            "description": "Solicitação não encontrada"
+          },
+          "503": {
+            "description": "Resultado temporariamente indisponível"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "session": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "ra_session"
+      }
+    }
+  }
+}

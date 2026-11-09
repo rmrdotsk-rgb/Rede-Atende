@@ -1,0 +1,9 @@
+node_modules
+.local
+dist
+test-results
+playwright-report
+docs
+package-lock.json
+CHANGELOG.md
+README.md
