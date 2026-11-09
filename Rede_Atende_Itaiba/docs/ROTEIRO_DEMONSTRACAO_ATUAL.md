@@ -1,4 +1,4 @@
-# Apresentação ao professor Rafael — Rede Atende 3.12.0
+# Apresentação ao professor Rafael — Rede Atende
 
 **Meta: 5–8 minutos, com dados fictícios e duas sessões independentes.** Prepare `npm.cmd run setup -- --embedded`, `npm.cmd run build` e `npm.cmd start`. Abra http://localhost:3001. Use cidadão e gestor em perfis separados; senhas geradas ficam só no computador. Não exiba `.local/demo-access.txt` na gravação.
 
