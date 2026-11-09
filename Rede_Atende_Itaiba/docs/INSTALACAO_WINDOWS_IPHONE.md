@@ -1,4 +1,4 @@
-# Windows 11 e iPhone — Rede Atende 3.12.0
+# Windows e iPhone — Rede Atende
 
 Site web com API e banco no notebook, sem Expo/React Native. Demonstração portátil dispensa Docker e PostgreSQL nativo. Use dados e contas fictícios: HTTP local não cifra o tráfego.
 
