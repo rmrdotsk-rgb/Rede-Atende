@@ -1,4 +1,4 @@
-# Testar o Rede Atende no Windows — 3.12.0
+# Testar o Rede Atende no Windows
 
 Extraia **Rede Atende.zip** em uma pasta nova. No VS Code, abra **Rede_Atende_Itaiba**, a pasta que contém `package.json` e o iniciador. Use Node 24.11 ou superior compatível com as dependências (alternativa: Node 22.18+; Node 23 e 24.0–24.10 não são aceitos); a versão de referência está em `.nvmrc`.
 
