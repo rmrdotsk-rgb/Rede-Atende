@@ -1,4 +1,4 @@
-# API REST — Rede Atende 3.12.0
+# API REST — Rede Atende
 
 Base relativa `/api/v1`. A interface e a API são servidas na mesma origem. Não é necessário expor a porta 5432 nem credenciais de banco ao celular. O cliente está em `src/services/storage.ts`; contratos de entrada em `src/domain/schemas.ts` e `server/app.ts`.
 
@@ -148,7 +148,7 @@ Bootstrap de ordens e `GET /work-orders/:id` acrescentam `requestProtocol`, `req
 
 URLs da interface usam `pendentesPagina`, `integradosPagina` e `historicoPagina`; a busca comum reinicia as três páginas. Filtros de Demandas também ficam na URL, preservando retorno de detalhes e atualização da página. Esses nomes são da interface, não parâmetros de API.
 
-## Correção de categoria — 3.10.2
+## Correção de categoria
 
 O mesmo PATCH de despacho aceita `updates.category` e `updates.categoryDetails`.
 Para essa operação, `expectedUpdatedAt` e `options.categoryReason` são obrigatórios.
