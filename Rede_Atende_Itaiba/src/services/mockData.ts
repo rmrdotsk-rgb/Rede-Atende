@@ -1,10 +1,8 @@
 /**
  * @license
  * SPDX-License-Identifier: Apache-2.0
- * Rede Atende 3.0 - Dados Iniciais Fictícios e Contextualizados (Itaíba - PE)
- * Projeto Acadêmico: Rede Atende
- * Estudante Demonstrativo: José Emerson Alves Saturno Barboza
- * Nota Acadêmica: Dados demonstrativos contextualizados para simulação acadêmica do DesafioPE.
+ * Rede Atende — dados de demonstração sobre Itaíba (PE)
+ * Registros fictícios para uso acadêmico; não correspondem a atendimentos oficiais.
  */
 
 import { EducationalRequest, SchoolUnit, SeiSimulationLog, Appointment } from '../types';
