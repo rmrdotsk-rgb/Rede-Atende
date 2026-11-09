@@ -1,4 +1,4 @@
-# Funcionalidades — Rede Atende 3.12.0
+# Funcionalidades — Rede Atende
 
 MVP acadêmico de atendimento educacional de Itaíba–PE. React/TypeScript na interface, API Fastify em `/api/v1` e PostgreSQL/PGlite no servidor. O navegador não mantém banco independente: cidadão e equipe consultam os mesmos registros por contas distintas.
 
