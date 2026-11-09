@@ -1,6 +1,6 @@
-# Rede Atende 3.12.0 — relatório de validação final
+# Rede Atende — relatório técnico de validação
 
-**Data:** 08/11/2026. **Escopo:** protótipo acadêmico web/PWA, Front-End Frameworks, UNINASSAU, professor Rafael Pacheco Ferreira.
+**Data da execução documentada:** 08/11/2026. **Escopo:** protótipo acadêmico web/PWA, Front-End Frameworks, UNINASSAU, professor Rafael Pacheco Ferreira.
 
 **Equipe preservada:** Itallo Thiago Herculano da Silva, Raimundo Anthoni Carvalho Alves Cruz e José Emerson Alves Saturno Barboza.
 
@@ -8,7 +8,7 @@
 
 ## 1. Base recebida e método
 
-Foi utilizado o arquivo efetivamente fornecido, `Rede Atende(8).zip`. Ele contém a versão interna 3.12.0 mencionada no pedido, com 189 arquivos. A verificação independente desta execução aprovou CRC dos 189 arquivos, ausência de caminhos duplicados e tamanho/SHA-256 dos 188 itens do inventário. SHA-256 do ZIP original: `5fb5735180fb22c6e7fac2d3a3b0d64abf00ccd2cff71fbd8d2cd2e7d3a156eb`.
+Este relatório registra uma execução anterior sobre o pacote `Rede Atende(8).zip`, que continha 189 arquivos. Seus resultados não comprovam automaticamente alterações posteriores realizadas no GitHub. A verificação independente desta execução aprovou CRC dos 189 arquivos, ausência de caminhos duplicados e tamanho/SHA-256 dos 188 itens do inventário. SHA-256 do ZIP original: `5fb5735180fb22c6e7fac2d3a3b0d64abf00ccd2cff71fbd8d2cd2e7d3a156eb`.
 
 O projeto foi extraído em diretório isolado. Antes das correções, `npm ci`, setup portátil, TypeScript, ESLint, build, 14 testes estáticos, 155 testes de domínio e 61 de API passaram. Fluxo, persistência, recuperação e migrações também passaram. Isso não foi tratado como aprovação automática do navegador: a execução inicial revelou falhas adicionais.
 
@@ -150,8 +150,8 @@ Para apresentar em 5–8 minutos, use dois perfis de navegador ou janela comum e
 
 A entrega não inclui `node_modules`, `dist`, `.env`, credenciais geradas, banco, uploads locais, caches, traces ou logs temporários. Todos os testes, fontes, lockfile e proposta acadêmica foram mantidos. O inventário final inclui os arquivos entregues com tamanho e SHA-256. Os JSON em `docs/validacao/` registram resultados e metodologia sem cookies ou tokens; as capturas mostram somente dados fictícios.
 
-## 7. Avaliação rigorosa
+## 7. Considerações finais
 
-**MVP acadêmico: 8,8/10.** O fluxo principal e as permissões têm evidência reproduzida em código, API, banco e navegador, com acabamento coerente e orçamento de produção medido. A nota não chega a 10 pela ausência de testes com pessoas e dispositivos físicos, limitação de recarga móvel e falta de validação em infraestrutura externa. É julgamento acadêmico conservador, não média matemática de contagem de testes.
+Os testes documentados sustentam a demonstração acadêmica local dos fluxos que foram executados. A cobertura de navegador foi consolidada a partir de mais de uma rodada; não houve uma única execução integral final com todos os casos aprovados. Permanece pendente a comprovação de recarga no WebKit móvel.
 
-**Prontidão municipal: 3,0/10.** O protótipo comprova um fluxo local relevante, mas operação pública depende de homologação, integração real, infraestrutura e procedimentos institucionais que não fazem parte desta entrega. Essa nota é um julgamento de prontidão, não uma média matemática dos testes.
+A aplicação é um protótipo. Seu uso público exigiria, entre outros itens, homologação, infraestrutura adequada, integração institucional e testes independentes com usuários e dispositivos reais.
