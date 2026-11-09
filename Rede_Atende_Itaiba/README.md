@@ -1,6 +1,6 @@
 # Rede Atende — Itaíba
 
-Protótipo acadêmico **3.12.0** da disciplina **Front-End Frameworks**, UNINASSAU, professor **Rafael Pacheco Ferreira**. Equipe: **Itallo Thiago Herculano da Silva, Raimundo Anthoni Carvalho Alves Cruz e José Emerson Alves Saturno Barboza**.
+Projeto acadêmico da disciplina **Front-End Frameworks**, UNINASSAU, professor **Rafael Pacheco Ferreira**. Equipe: **Itallo Thiago Herculano da Silva, Raimundo Anthoni Carvalho Alves Cruz e José Emerson Alves Saturno Barboza**.
 
 O projeto centraliza demandas educacionais de **Itaíba–PE**, a partir do DesafioPE. A comunidade registra e acompanha protocolos; a equipe faz triagem, organiza a execução e informa a conclusão. Os dados de demonstração são sintéticos. Não há vínculo, autorização ou operação pela Prefeitura; a integração SEI é **simulada**.
 
