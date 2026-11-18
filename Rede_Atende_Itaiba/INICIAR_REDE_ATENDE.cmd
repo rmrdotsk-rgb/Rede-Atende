@@ -49,7 +49,7 @@ call npm.cmd run build
 if errorlevel 1 goto :erro
 if exist ".local\demo-access.txt" echo Credenciais locais: .local\demo-access.txt ^(NUNCA as compartilhe^).
 echo.
-echo Navegador do notebook: http://localhost:3001
+echo Navegador do notebook: http://127.0.0.1:3001
 echo Ctrl+C encerra o servidor. Feche esta janela somente depois de terminar.
 echo.
 call npm.cmd start

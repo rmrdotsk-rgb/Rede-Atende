@@ -4,5 +4,12 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false
   },
-  "include": ["server", "src/domain", "src/types", "src/utils", "src/services/mockData.ts"]
+  "include": [
+    "server",
+    "src/domain",
+    "src/types",
+    "src/utils",
+    "src/services/mockData.ts",
+    "scripts/reset-demo-password.mts"
+  ]
 }

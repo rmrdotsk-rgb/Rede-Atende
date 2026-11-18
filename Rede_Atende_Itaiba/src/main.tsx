@@ -3,6 +3,9 @@ import App from './App.tsx';
 import { ApiBoundary } from './components/common/ApiBoundary';
 import './index.css';
 import { AppBoundary } from './components/common/AppBoundary';
+import { initializeAppearance } from './utils/appearance';
+
+initializeAppearance();
 
 createRoot(document.getElementById('root')!).render(
   <AppBoundary>

@@ -172,12 +172,12 @@ test('menu móvel devolve foco, fecha ao navegar e suporta fonte ampliada e alto
     false,
   );
   await page.getByRole('button', { name: 'Abrir opções de acessibilidade e notificações' }).click();
-  await page.getByRole('button', { name: 'Contraste', exact: true }).click();
+  await page.getByLabel('Tema de cores').selectOption('high-contrast');
   const result = await new AxeBuilder({ page })
     .withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'])
     .analyze();
   expect(result.violations).toEqual([]);
-  await page.getByRole('button', { name: 'Contraste', exact: true }).click();
+  await page.getByLabel('Tema de cores').selectOption('light');
   await page.screenshot({ path: 'test-results/3.9/menu-fonte-200-375.png', fullPage: true });
 });
 

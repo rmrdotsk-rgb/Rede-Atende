@@ -149,13 +149,15 @@ export function Header({
               <NotificationPanel audience={community ? 'comunidade' : 'gestao'} />
             )}
             <AccessibilityToolbar />
-            <Link
-              to={community ? '/admin' : '/'}
-              aria-label={community ? 'Área restrita da equipe' : 'Visão da comunidade'}
-              className="min-h-11 inline-flex items-center border border-blue-200 rounded-lg bg-blue-50 text-blue-800 px-3 text-xs font-semibold"
-            >
-              {community ? 'Gestão' : 'Comunidade'}
-            </Link>
+            {(!community || storageService.user?.role !== 'cidadao') && (
+              <Link
+                to={community ? '/admin' : '/'}
+                aria-label={community ? 'Área restrita da equipe' : 'Visão da comunidade'}
+                className="min-h-11 inline-flex items-center border border-blue-200 rounded-lg bg-blue-50 text-blue-800 px-3 text-xs font-semibold"
+              >
+                {community ? 'Gestão' : 'Comunidade'}
+              </Link>
+            )}
           </div>
         </div>
         <button

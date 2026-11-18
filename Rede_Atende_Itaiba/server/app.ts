@@ -51,6 +51,23 @@ const credentials = z
     password: z.string().min(12).max(128),
   })
   .strict();
+const demoLogins = ['gestor', 'operador', 'auditor', 'cidadao'] as const;
+const loginCredentials = credentials.extend({
+  email: z
+    .string()
+    .trim()
+    .toLowerCase()
+    .max(254)
+    .refine(
+      (value) =>
+        demoLogins.some((role) => role === value) ||
+        z.string().email().safeParse(value).success,
+      'Informe um usuário ou e-mail válido.',
+    )
+    .transform((value) =>
+      demoLogins.some((role) => role === value) ? `${value}@redeatende.invalid` : value,
+    ),
+});
 const dispatch = z
   .object({
     updates: z
@@ -341,7 +358,7 @@ export async function buildApp(options: { serveFrontend?: boolean; logger?: bool
     return createSession(user, reply);
   });
   app.post('/api/v1/auth/login', async (req, reply) => {
-    const body = credentials.parse(req.body);
+    const body = loginCredentials.parse(req.body);
     const permitted = await transaction(async (sql) => {
       const ip = await limit(sql, `login-ip:${req.ip}`, 30);
       const account = await limit(sql, `login:${req.ip}:${body.email}`, 5);

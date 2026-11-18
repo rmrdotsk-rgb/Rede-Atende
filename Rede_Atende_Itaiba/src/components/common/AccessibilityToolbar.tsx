@@ -1,21 +1,36 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Contrast, ALargeSmall } from 'lucide-react';
+import { ALargeSmall } from 'lucide-react';
+import {
+  applyTheme,
+  readTheme,
+  readFontScale,
+  saveAppearance,
+  THEME_KEY,
+  FONT_KEY,
+  type ColorTheme,
+} from '../../utils/appearance';
 
 export function AccessibilityToolbar() {
-  const [contrast, setContrast] = useState(false);
-  const [scale, setScale] = useState(100);
+  const [theme, setTheme] = useState(readTheme);
+  const [scale, setScale] = useState(readFontScale);
   const navigate = useNavigate();
   useEffect(() => {
-    document.documentElement.classList.toggle('access-high-contrast', contrast);
-    return () => document.documentElement.classList.remove('access-high-contrast');
-  }, [contrast]);
+    applyTheme(theme);
+    saveAppearance(THEME_KEY, theme);
+  }, [theme]);
   useEffect(() => {
     document.documentElement.style.fontSize = `${scale}%`;
-    return () => {
-      document.documentElement.style.fontSize = '';
-    };
+    saveAppearance(FONT_KEY, String(scale));
   }, [scale]);
+  useEffect(() => {
+    const sync = (event: StorageEvent) => {
+      if (event.key === THEME_KEY || event.key === null) setTheme(readTheme());
+      if (event.key === FONT_KEY || event.key === null) setScale(readFontScale());
+    };
+    window.addEventListener('storage', sync);
+    return () => window.removeEventListener('storage', sync);
+  }, []);
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       if (!e.altKey || e.ctrlKey || e.metaKey || e.shiftKey || e.repeat) return;
@@ -36,16 +51,16 @@ export function AccessibilityToolbar() {
       role="group"
       aria-label="Ferramentas de acessibilidade"
     >
-      <button
-        type="button"
-        aria-pressed={contrast}
-        onClick={() => setContrast((x) => !x)}
-        className="access-tool-button text-blue-900"
-        title="Alternar alto contraste"
+      <select
+        aria-label="Tema de cores"
+        className="theme-select field"
+        value={theme}
+        onChange={(event) => setTheme(event.target.value as ColorTheme)}
       >
-        <Contrast className="h-5 w-5" aria-hidden="true" />
-        <span className="sr-only">Contraste</span>
-      </button>
+        <option value="light">Claro</option>
+        <option value="dark">Escuro</option>
+        <option value="high-contrast">Alto contraste</option>
+      </select>
       <button
         type="button"
         onClick={() => setScale((x) => (x >= 125 ? 100 : x + 12.5))}

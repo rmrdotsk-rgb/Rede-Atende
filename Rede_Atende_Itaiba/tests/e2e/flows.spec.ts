@@ -14,7 +14,7 @@ async function signIn(
   const context = await browser.newContext();
   const page = await context.newPage();
   await page.goto('/entrar');
-  await page.getByLabel('E-mail de acesso').fill(`${role}@redeatende.invalid`);
+  await page.getByLabel('E-mail de acesso').fill(role);
   await page.getByLabel('Senha (mínimo 12 caracteres)').fill(password);
   await page.getByRole('button', { name: 'Entrar', exact: true }).click();
   await expect(page).not.toHaveURL(/\/entrar(?:\?|$)/);

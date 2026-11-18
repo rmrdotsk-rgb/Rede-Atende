@@ -195,9 +195,9 @@ export const AdminDashboard: React.FC = () => {
                   angle={-25}
                   textAnchor="end"
                   interval={0}
-                  tick={{ fontSize: 11, fill: '#64748B' }}
+                  tick={{ fontSize: 11, fill: 'var(--chart-tick)' }}
                 />
-                <YAxis allowDecimals={false} tick={{ fontSize: 11, fill: '#64748B' }} />
+                <YAxis allowDecimals={false} tick={{ fontSize: 11, fill: 'var(--chart-tick)' }} />
                 <Tooltip
                   formatter={(value: any) => [`${value} demandas`, 'Total']}
                   contentStyle={{
