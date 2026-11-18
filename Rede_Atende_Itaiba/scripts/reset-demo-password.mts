@@ -5,22 +5,20 @@ import { randomUUID } from 'node:crypto';
 import { loadEnvFile } from 'node:process';
 
 const args = process.argv.slice(2);
-const email = args[1];
+const role = args[0] === '--login' ? args[1] : args[1]?.split('@')[0];
 const roles = ['gestor', 'operador', 'auditor', 'cidadao'];
-const role = email?.split('@')[0];
+const email = role ? `${role}@redeatende.invalid` : '';
+const identifierValid =
+  (args[0] === '--login' && args[1] === role) ||
+  (args[0] === '--email' && args[1] === email);
 if (
   args.length !== 3 ||
-  args[0] !== '--email' ||
   args[2] !== '--confirm' ||
-  !roles.includes(role) ||
-  email !== `${role}@redeatende.invalid`
+  !roles.includes(role ?? '') ||
+  !identifierValid
 ) {
-  console.error(
-    'Uso local: npm run demo:reset-password -- --email gestor@redeatende.invalid --confirm',
-  );
-  console.error(
-    'Pare o servidor e configure a nova SEED_GESTOR_PASSWORD no .env privado. Nenhuma senha deve ser passada como argumento.',
-  );
+  console.error('Uso: npm run demo:reset-password -- --login gestor --confirm');
+  console.error('Pare o servidor e defina SEED_GESTOR_PASSWORD no .env privado antes de executar.');
   process.exit(1);
 }
 try {

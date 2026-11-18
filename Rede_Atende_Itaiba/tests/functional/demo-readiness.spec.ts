@@ -57,7 +57,7 @@ test('troca de conta encerra a sessão no servidor e retorna à gestão após lo
     headers: { Cookie: `ra_session=${old.value}` },
   });
   expect((await previous.json()).user).toBeNull();
-  await page.getByLabel('E-mail de acesso').fill('gestor@redeatende.invalid');
+  await page.getByLabel('E-mail de acesso').fill('gestor');
   await page.getByLabel('Senha (mínimo 12 caracteres)').fill('SomenteTeste-123456789');
   await page.getByRole('button', { name: 'Entrar', exact: true }).click();
   await expect(page).toHaveURL(/\/admin$/);

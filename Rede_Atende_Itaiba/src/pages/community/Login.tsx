@@ -25,7 +25,7 @@ export function Login() {
         <p className="text-sm text-slate-600 mt-2">
           {teamAccess && !register
             ? 'Entre com a conta de gestor, operador ou auditor fornecida pelo responsável pela demonstração. Use somente informações fictícias.'
-            : 'Use somente identidade e informações fictícias. Sua conta permite consultar as próprias solicitações em outros dispositivos.'}
+            : 'Use o usuário da demonstração ou seu e-mail cadastrado. Registre apenas informações fictícias.'}
         </p>
         {teamAccess && (
           <p className="text-sm text-slate-600 mt-2">
@@ -96,14 +96,15 @@ export function Login() {
         )}
         <div>
           <label className="field-label" htmlFor="account-email">
-            E-mail de acesso
+            {register ? 'E-mail de acesso' : 'E-mail de acesso ou usuário'}
           </label>
           <input
             className="field"
             id="account-email"
-            type="email"
+            type={register ? 'email' : 'text'}
             required
             maxLength={254}
+            placeholder={register ? 'nome@exemplo.com' : 'Ex.: gestor ou cidadao'}
             autoComplete="username"
             value={email}
             onChange={(e) => setEmail(e.target.value)}

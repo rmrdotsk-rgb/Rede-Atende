@@ -27,14 +27,14 @@ export async function recordDemoAccess(entries: { role: Role; password: string }
   }
   for (const { role } of entries)
     previous = previous.replace(
-      new RegExp(`^${role}: ${role}@redeatende\\.invalid\\r?\\nSenha: [^\\r\\n]*\\r?\\n?`, 'gm'),
+      new RegExp(`^${role}: ${role}(?:@redeatende\\.invalid)?\\r?\\nSenha: [^\\r\\n]*\\r?\\n?`, 'gm'),
       '',
     );
   const content =
     previous +
     (previous ? '' : 'Acessos locais de ensaio — não compartilhar.\n') +
     entries
-      .map(({ role, password }) => `${role}: ${role}@redeatende.invalid\nSenha: ${password}\n\n`)
+      .map(({ role, password }) => `${role}: ${role}\nSenha: ${password}\n\n`)
       .join('');
   // 'w' creates or truncates the file; Windows cannot ftruncate an append-only handle.
   const file = await open(path, 'w', 0o600);

@@ -35,6 +35,38 @@ after(async () => {
   await rm(directory, { recursive: true, force: true });
 });
 
+test('usuários curtos entram com suas próprias permissões e aceitam o login antigo', async () => {
+  const app = await buildApp();
+  try {
+    for (const role of ['gestor', 'operador', 'auditor', 'cidadao']) {
+      const response = await app.inject({
+        method: 'POST',
+        url: '/api/v1/auth/login',
+        headers: { 'X-Requested-With': 'RedeAtende' },
+        payload: { email: role, password: originalPassword },
+      });
+      assert.equal(response.statusCode, 200, role + ': ' + response.body);
+      assert.equal(response.json().user.role, role);
+    }
+    const oldLogin = await app.inject({
+      method: 'POST',
+      url: '/api/v1/auth/login',
+      headers: { 'X-Requested-With': 'RedeAtende' },
+      payload: { email: 'gestor@redeatende.invalid', password: originalPassword },
+    });
+    assert.equal(oldLogin.statusCode, 200);
+    const denied = await app.inject({
+      method: 'POST',
+      url: '/api/v1/auth/login',
+      headers: { 'X-Requested-With': 'RedeAtende' },
+      payload: { email: 'cidadao', password: newPassword },
+    });
+    assert.equal(denied.statusCode, 401);
+  } finally {
+    await app.close();
+  }
+});
+
 test('senha inválida na instalação inicial não deixa contas parcialmente criadas', () => {
   const code = `
     const { seed } = await import('./server/db/seed.ts');
@@ -86,7 +118,7 @@ test('arquivo privado limita permissões e não inventa acessos se a cópia loca
   await recordDemoAccess([{ role: 'cidadao', password: originalPassword }]);
   if (process.platform !== 'win32') assert.equal((await stat(accessFile)).mode & 0o777, 0o600);
   const saved = await readFile(accessFile, 'utf8');
-  assert.equal(saved.match(/cidadao: cidadao@/g)?.length, 1);
+  assert.equal(saved.match(/^cidadao: cidadao$/gm)?.length, 1);
   await rm(accessFile);
   await seed();
   await assert.rejects(stat(accessFile), { code: 'ENOENT' });
@@ -96,6 +128,8 @@ test('reset exige confirmação explícita e se limita às contas locais de demo
   const before = (await accounts()).rows;
   for (const args of [
     ['--email', 'gestor@redeatende.invalid'],
+    ['--login', 'gestor'],
+    ['--login', 'intruso', '--confirm'],
     ['--email', 'pessoa@exemplo.invalid', '--confirm'],
   ]) {
     const result = spawnSync(
@@ -117,8 +151,8 @@ test('reset com banco ocupado é recusado antes de alterar a senha', async () =>
       '--import',
       'tsx',
       'scripts/reset-demo-password.mts',
-      '--email',
-      'gestor@redeatende.invalid',
+      '--login',
+      'gestor',
       '--confirm',
     ],
     { encoding: 'utf8' },
@@ -150,8 +184,8 @@ test('reset faz backup, revoga somente a sessão alvo e preserva solicitações,
       '--import',
       'tsx',
       'scripts/reset-demo-password.mts',
-      '--email',
-      'gestor@redeatende.invalid',
+      '--login',
+      'gestor',
       '--confirm',
     ],
     { encoding: 'utf8' },
