@@ -14,6 +14,7 @@ export function Login() {
     [busy, setBusy] = useState(false);
   const navigate = useNavigate(),
     [query] = useSearchParams();
+  const teamAccess = query.get('voltar')?.split('?')[0].startsWith('/admin');
   return (
     <div className="max-w-lg mx-auto panel space-y-5">
       <div>
@@ -22,9 +23,15 @@ export function Login() {
           {register ? 'Criar conta de cidadão' : 'Entrar no atendimento'}
         </h1>
         <p className="text-sm text-slate-600 mt-2">
-          Use somente identidade e informações fictícias. Sua conta permite consultar as próprias
-          solicitações em outros dispositivos.
+          {teamAccess && !register
+            ? 'Entre com a conta de gestor, operador ou auditor fornecida pelo responsável pela demonstração. Use somente informações fictícias.'
+            : 'Use somente identidade e informações fictícias. Sua conta permite consultar as próprias solicitações em outros dispositivos.'}
         </p>
+        {teamAccess && (
+          <p className="text-sm text-slate-600 mt-2">
+            O cadastro público cria somente contas de cidadão.
+          </p>
+        )}
       </div>
       <DemoGuide />
       <form

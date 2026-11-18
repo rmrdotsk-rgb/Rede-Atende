@@ -164,7 +164,7 @@ test('cartões, detalhes e filtros preservam legibilidade em oito larguras e mod
   await page.keyboard.press('Escape');
   await page.setViewportSize({ width: 375, height: 900 });
   await page.getByRole('button', { name: 'Abrir opções de acessibilidade e notificações' }).click();
-  await page.getByRole('button', { name: 'Contraste', exact: true }).click();
+  await page.getByLabel('Tema de cores').selectOption('high-contrast');
   const result = await new AxeBuilder({ page })
     .withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'])
     .analyze();

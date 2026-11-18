@@ -318,7 +318,7 @@ test('cabeçalho móvel preserva acesso e reúne opções sem cobrir o conteúdo
     expect(bounds!.height).toBeGreaterThanOrEqual(44);
   }
   await options.click();
-  await expect(page.getByRole('button', { name: 'Contraste', exact: true })).toBeVisible();
+  await expect(page.getByLabel('Tema de cores')).toBeVisible();
   const result = await new AxeBuilder({ page })
     .withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'])
     .analyze();
