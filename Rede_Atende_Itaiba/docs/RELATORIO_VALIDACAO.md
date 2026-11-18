@@ -148,7 +148,11 @@ npm.cmd start
 
 Para apresentar em 5–8 minutos, use dois perfis de navegador ou janela comum e anônima. Mostre início → cidadão entra/registra → protocolo/acompanhamento → gestor faz triagem/execução → conclusão → cidadão avalia → gestor confere indicadores. Se houver OS ou vistoria obrigatória, conclua ou cancele com justificativa antes de concluir a demanda. Prepare cenários secundários antes da aula. O roteiro completo continua em `docs/ROTEIRO_DEMONSTRACAO_ATUAL.md`.
 
-A entrega não inclui `node_modules`, `dist`, `.env`, credenciais geradas, banco, uploads locais, caches, traces ou logs temporários. Todos os testes, fontes, lockfile e proposta acadêmica foram mantidos. O inventário final inclui os arquivos entregues com tamanho e SHA-256. Os JSON em `docs/validacao/` registram resultados e metodologia sem cookies ou tokens; as capturas mostram somente dados fictícios.
+A entrega não inclui `node_modules`, `dist`, `.env`, credenciais geradas, banco, uploads locais, caches, traces ou logs temporários. Todos os testes, fontes, lockfile e proposta acadêmica foram mantidos. O inventário da validação anterior foi conferido na ocasião, mas o arquivo `INVENTARIO_ENTREGA.json` foi removido do repositório no commit `1039cf1`. Portanto, este relatório descreve evidências históricas, não comprova a integridade da versão atual do GitHub. Os JSON em `docs/validacao/` registram resultados e metodologia sem cookies ou tokens; as capturas mostram somente dados fictícios.
+
+### Evidência posterior de execução local — 18/11/2026
+
+Três gravações locais mostram o servidor respondendo em `127.0.0.1:3001`, cadastro de cidadão, criação de solicitação com PDF, geração de protocolo `EDU-2026-000003` e consulta posterior do pedido. Uma captura de `/admin` mostra bloqueio correto para a sessão de cidadão, mas não comprova login de gestor, triagem ou conclusão. Esta observação complementa os logs anteriores e não representa uma execução integral das suítes de API e navegador.
 
 ## 7. Considerações finais
 

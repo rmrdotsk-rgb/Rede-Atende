@@ -8,6 +8,8 @@ Desenvolvido para a disciplina **Front-End Frameworks**, da **UNINASSAU**, com o
 
 > **Projeto de demonstração.** Os dados e as contas usadas nos testes são fictícios. O Rede Atende não é um serviço oficial da Prefeitura de Itaíba, não encaminha solicitações reais e não possui integração oficial com o SEI.
 
+Para uma visão resumida, veja [Resumo da entrega](ENTREGA_ACADEMICA.md) e [Histórias de usuário](Rede_Atende_Itaiba/docs/HISTORIAS_DE_USUARIO.md).
+
 ## Como funciona
 
 O cidadão se cadastra, escolhe uma escola e uma categoria, descreve o problema e recebe um número de protocolo. Depois, pode acompanhar o andamento, enviar informações complementares e avaliar a conclusão.
@@ -124,6 +126,21 @@ npm.cmd run test:e2e
 Os testes de API podem gerar o build automaticamente. Para conferências adicionais de banco, backup e desempenho, consulte o [guia de testes no Windows](Rede_Atende_Itaiba/docs/COMO_TESTAR_NO_WINDOWS.md).
 
 **Se aparecer “Execute npm run build antes de npm start”**, rode `npm.cmd run build` e depois `npm.cmd start`.
+
+### Se a aplicação não abrir
+
+Abra o PowerShell na pasta `Rede_Atende_Itaiba`, onde estão `package.json` e `package-lock.json`. Se aparecer `tsc não é reconhecido` ou `Cannot find package 'tsx'`, a instalação das dependências não foi concluída. Execute:
+
+```powershell
+npm.cmd ci
+npm.cmd run setup -- --embedded
+npm.cmd run build
+npm.cmd start
+```
+
+Só avance para o próximo comando quando o anterior terminar sem erro. Mantenha o terminal de `npm.cmd start` aberto durante a demonstração.
+
+Se o navegador mostrar **“Sem conexão com o atendimento”**, confirme primeiro que o servidor está aberto. Em outro PowerShell, execute `Invoke-WebRequest http://127.0.0.1:3001 -UseBasicParsing`. Uma resposta HTTP 200 indica que o servidor respondeu; nesse caso, tente abrir `http://127.0.0.1:3001` no navegador. Isso evita uma página offline antiga que pode ter sido armazenada na origem `localhost`. A página offline, isoladamente, não indica falta de internet.
 
 ## Organização das pastas
 

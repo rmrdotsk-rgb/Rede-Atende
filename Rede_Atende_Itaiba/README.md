@@ -73,6 +73,8 @@ O destino de restauração precisa não existir. A restauração cria PGlite sep
 
 ## Documentação
 
+- [Histórias de usuário](docs/HISTORIAS_DE_USUARIO.md)
+
 - [Funcionalidades e rotas](docs/FUNCIONALIDADES.md)
 - [API REST](docs/API_REST.md) e [contrato OpenAPI](docs/openapi.json)
 - [Regras operacionais](docs/REGRAS_OPERACIONAIS_ITAIBA.md)
