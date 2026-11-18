@@ -10,10 +10,13 @@ for (const width of [390, 1366])
     }) => {
       const actors = JSON.parse(await readFile(process.env.E2E_AUTH_FILE!, 'utf8'));
       await context.addCookies(actors.gestor.cookies);
-      await context.addInitScript(
-        (value) => localStorage.setItem('redeatende_color_theme', value),
-        theme,
-      );
+      await context.addInitScript((value) => {
+        try {
+          localStorage.setItem('redeatende_color_theme', value);
+        } catch {
+          /* Páginas auxiliares de auditoria não têm armazenamento. */
+        }
+      }, theme);
       await page.setViewportSize({ width, height: 900 });
       await page.goto('/admin/demandas');
       await page

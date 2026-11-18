@@ -75,10 +75,13 @@ for (const width of [360, 390, 768, 1366])
           locale: 'pt-BR',
         });
         await actor(context, role);
-        await context.addInitScript(
-          (value) => localStorage.setItem('redeatende_color_theme', value),
-          theme,
-        );
+        await context.addInitScript((value) => {
+          try {
+            localStorage.setItem('redeatende_color_theme', value);
+          } catch {
+            /* Páginas auxiliares de auditoria não têm armazenamento. */
+          }
+        }, theme);
         const page = await context.newPage();
         const routes =
           role === 'cidadao'
