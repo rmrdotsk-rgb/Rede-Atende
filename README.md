@@ -8,6 +8,8 @@ Desenvolvido para a disciplina **Front-End Frameworks**, da **UNINASSAU**, com o
 
 > **Projeto de demonstração.** Os dados e as contas usadas nos testes são fictícios. O Rede Atende não é um serviço oficial da Prefeitura de Itaíba, não encaminha solicitações reais e não possui integração oficial com o SEI.
 
+Para uma visão resumida, veja [Resumo da entrega](ENTREGA_ACADEMICA.md) e [Histórias de usuário](Rede_Atende_Itaiba/docs/HISTORIAS_DE_USUARIO.md).
+
 ## Como funciona
 
 O cidadão se cadastra, escolhe uma escola e uma categoria, descreve o problema e recebe um número de protocolo. Depois, pode acompanhar o andamento, enviar informações complementares e avaliar a conclusão.
