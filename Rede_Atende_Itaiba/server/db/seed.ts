@@ -1,5 +1,4 @@
 import { randomUUID, randomBytes } from 'node:crypto';
-import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { transaction, closeDatabase } from './database';
 import { migrate } from './migrate';
@@ -7,35 +6,34 @@ import { emptyState, saveState, loadState, mutate } from './repository';
 import { INITIAL_SCHOOLS } from '../../src/services/mockData';
 import { DEPARTMENTS } from '../../src/domain/serviceCatalog';
 import { hashPassword, type Role, type User } from '../auth';
+import { demoRoles, recordDemoAccess, validateDemoPassword } from './demoAccess';
 export async function seed() {
   await migrate();
-  await mkdir('.local', { recursive: true });
-  let access = 'Acessos locais de ensaio — não compartilhar em produção.\n';
-  for (const role of ['gestor', 'operador', 'auditor', 'cidadao'] as Role[]) {
-    const email = `${role}@redeatende.invalid`;
-    const existing = await transaction((sql) =>
-      sql.query('SELECT id FROM users WHERE email=$1', [email]),
-    );
-    if (existing.rows.length) continue;
-    const env = process.env[`SEED_${role.toUpperCase()}_PASSWORD`];
-    const password = env || randomBytes(18).toString('base64url');
-    if (password.length < 12 || password.length > 128)
-      throw new Error('Senha de seed deve ter 12 a 128 caracteres.');
-    const hash = await hashPassword(password);
-    const user: User = {
-      id: randomUUID(),
-      email,
-      name: `${role[0].toUpperCase() + role.slice(1)} de demonstração`,
-      role,
-    };
-    await transaction((sql) =>
-      sql.query(
-        'INSERT INTO users(id,email,name,password_hash,role) VALUES($1,$2,$3,$4,$5) ON CONFLICT(email) DO NOTHING',
+  const access = await transaction(async (sql) => {
+    const created: { role: Role; password: string }[] = [];
+    for (const role of demoRoles) {
+      const email = `${role}@redeatende.invalid`;
+      const existing = await sql.query('SELECT id FROM users WHERE email=$1', [email]);
+      if (existing.rows.length) continue;
+      const password =
+        process.env[`SEED_${role.toUpperCase()}_PASSWORD`] || randomBytes(18).toString('base64url');
+      validateDemoPassword(password);
+      const hash = await hashPassword(password);
+      const user: User = {
+        id: randomUUID(),
+        email,
+        name: `${role[0].toUpperCase() + role.slice(1)} de demonstração`,
+        role,
+      };
+      const inserted = await sql.query(
+        'INSERT INTO users(id,email,name,password_hash,role) VALUES($1,$2,$3,$4,$5) ON CONFLICT(email) DO NOTHING RETURNING id',
         [user.id, email, user.name, hash, role],
-      ),
-    );
-    access += `${role}: ${email}\nSenha: ${password}\n\n`;
-  }
+      );
+      if (inserted.rows.length) created.push({ role, password });
+    }
+    return created;
+  });
+  await recordDemoAccess(access);
   await transaction(async (sql) => {
     for (const [i, name] of DEPARTMENTS.entries())
       await sql.query('INSERT INTO departments(id,name) VALUES($1,$2) ON CONFLICT DO NOTHING', [
@@ -75,15 +73,6 @@ export async function seed() {
       "INSERT INTO settings(id,data) VALUES('initialized','true') ON CONFLICT DO NOTHING",
     );
   });
-  if (access.includes('Senha:')) {
-    let previous = '';
-    try {
-      previous = await readFile(process.env.SEED_ACCESS_FILE ?? '.local/demo-access.txt', 'utf8');
-    } catch {}
-    await writeFile(process.env.SEED_ACCESS_FILE ?? '.local/demo-access.txt', previous + access, {
-      mode: 0o600,
-    });
-  }
 }
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   await seed();

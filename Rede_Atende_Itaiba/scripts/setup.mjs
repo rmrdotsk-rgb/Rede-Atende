@@ -20,9 +20,10 @@ if (!existsSync('.env')) {
     writeFileSync(
       '.env',
       'DB_MODE=embedded\nPORT=3001\nCOOKIE_SECURE=false\nSERVE_FRONTEND=false\n',
+      { mode: 0o600, flag: 'wx' },
     );
   else {
-    writeFileSync('.env', readFileSync('.env.example'));
+    writeFileSync('.env', readFileSync('.env.example'), { mode: 0o600, flag: 'wx' });
     console.log(
       'Arquivo .env criado. Preencha DATABASE_URL com seu PostgreSQL e execute npm run setup novamente. Alternativa portátil explícita: npm run setup -- --embedded',
     );
