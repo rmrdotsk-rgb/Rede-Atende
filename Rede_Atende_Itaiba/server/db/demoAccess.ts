@@ -36,10 +36,10 @@ export async function recordDemoAccess(entries: { role: Role; password: string }
     entries
       .map(({ role, password }) => `${role}: ${role}@redeatende.invalid\nSenha: ${password}\n\n`)
       .join('');
-  const file = await open(path, 'a+', 0o600);
+  // 'w' creates or truncates the file; Windows cannot ftruncate an append-only handle.
+  const file = await open(path, 'w', 0o600);
   try {
     await chmod(path, 0o600);
-    await file.truncate(0);
     await file.writeFile(content);
   } finally {
     await file.close();
