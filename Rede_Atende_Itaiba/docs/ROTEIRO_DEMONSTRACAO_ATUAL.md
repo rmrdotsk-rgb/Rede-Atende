@@ -1,6 +1,6 @@
 # Apresentação ao professor Rafael — Rede Atende
 
-**Meta: 5–8 minutos, com dados fictícios e duas sessões independentes.** Prepare `npm.cmd run setup -- --embedded`, `npm.cmd run build` e `npm.cmd start`. Abra http://localhost:3001. Use cidadão e gestor em perfis separados; senhas geradas ficam só no computador. Não exiba `.local/demo-access.txt` na gravação.
+**Meta: 5–8 minutos, com dados fictícios e duas sessões independentes.** Prepare `npm.cmd run setup -- --embedded`, `npm.cmd run build` e `npm.cmd start`. Abra http://127.0.0.1:3001. Use cidadão e gestor em perfis separados; senhas geradas ficam só no computador. Não exiba `.local/demo-access.txt` na gravação.
 
 | Etapa                  | Ação simples                                                                                                                                  | Resultado observável                                                                                         |
 | ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
@@ -26,3 +26,15 @@ O desafio oficial vai além deste recorte: exige aplicativo móvel Android e/ou 
 No celular, localize Entrar/Sair e abra o botão de opções para acessibilidade e notificações. Preencha parte de uma nova solicitação fictícia, tente voltar ao início e escolha Continuar preenchendo. Mostre que os campos permanecem; depois escolha descartar ou conclua o envio. Não apresente os indicadores e avisos como atividade real do município.
 
 Windows/iPhone físicos, Safari, leitores de tela e teste moderado com pessoas dependem de execução específica no ambiente disponível.
+
+## Sequência curta de 6–8 minutos
+
+1. **0:00–0:45:** apresentar o recorte acadêmico e escolher o tema desejado; o alto contraste continua disponível separadamente do escuro.
+2. **0:45–2:15:** na janela normal, entrar como cidadão, cadastrar pedido fictício com PDF e copiar o protocolo gerado nesta execução.
+3. **2:15–3:00:** recarregar o acompanhamento; abrir `/admin` como cidadão e mostrar a saída para a comunidade.
+4. **3:00–5:00:** na janela privada, entrar como gestor, localizar o mesmo protocolo em Demandas e despachar com prioridade, setor, responsável e nota.
+5. **5:00–6:30:** criar/atualizar a OS prevista para a categoria e concluir seguindo as transições e obrigações do sistema. Se faltar uma etapa obrigatória, mostrar a mensagem e cumprir a etapa.
+6. **6:30–7:15:** voltar ao cidadão, atualizar o acompanhamento e conferir o histórico público e a solução.
+7. **7:15–8:00:** parar com Ctrl+C, iniciar novamente com `npm.cmd start` e reabrir o protocolo e o PDF.
+
+Prepare os acessos em particular com o [guia local](ACESSOS_LOCAIS.md). Não abra o arquivo de senhas enquanto compartilha a tela. O protocolo `EDU-2026-000003` é evidência histórica; use o protocolo recém-gerado na demonstração.

@@ -10,7 +10,7 @@ Frontend React/TypeScript/Vite/Tailwind, API Fastify em `/api/v1` e banco persis
 
 1. Instale **Node.js 24.11+** compatível com as dependências e extraia o ZIP para uma pasta nova.
 2. Abra `Rede_Atende_Itaiba` e dê dois cliques em **`INICIAR_REDE_ATENDE.cmd`**. O iniciador verifica versões, instala dependências ausentes, prepara o banco portátil, compila e inicia o servidor.
-3. Abra **http://localhost:3001** e mantenha o terminal aberto. Os acessos fictícios ficam em `.local/demo-access.txt`, somente no computador. Também é possível cadastrar um cidadão pela tela **Entrar**.
+3. Abra **http://127.0.0.1:3001** e mantenha o terminal aberto. Os acessos fictícios ficam em `.local/demo-access.txt`, somente no computador. Também é possível cadastrar um cidadão pela tela **Entrar**.
 
 No VS Code, abra a pasta que contém `package.json` e execute no PowerShell:
 
@@ -26,6 +26,8 @@ Nas próximas execuções, use `npm.cmd start`. Pare com `Ctrl+C`. Preserve `.en
 
 Para usar o telefone na mesma rede privada, mantenha o servidor no notebook e abra `http://IP-DO-NOTEBOOK:3001`. Veja o [guia de Windows e iPhone](docs/INSTALACAO_WINDOWS_IPHONE.md). A aplicação é web/PWA.
 
+O guia de [acessos locais e recuperação de senha](docs/ACESSOS_LOCAIS.md) explica a primeira instalação, as contas persistentes e a redefinição explícita com backup.
+
 ## Usar a demonstração
 
 O cidadão escolhe escola e categoria, preenche o relato e recebe um protocolo `EDU-AAAA-NNNNNN`. O acompanhamento reúne histórico público, anexos, pedidos de complemento, solução e avaliação do atendimento. O servidor aceita PNG, JPEG e PDF de até 5 MB, com limite de cinco anexos por solicitação.
@@ -33,6 +35,8 @@ O cidadão escolhe escola e categoria, preenche o relato e recebe um protocolo `
 A equipe acessa demandas, triagem, unidades, ordens de serviço, prazos, agenda, relatórios/CSV e SEI simulado. As permissões são conferidas na API; o auditor consulta sem despachar. Use duas sessões independentes para apresentar cidadão e gestor: [roteiro de demonstração](docs/ROTEIRO_DEMONSTRACAO_ATUAL.md).
 
 Há sete categorias: infraestrutura, transporte escolar, alimentação, documentação, material didático, apoio pedagógico/inclusão e outros. O catálogo público de escolas é referencial e não é importado automaticamente; os registros de operação da demonstração são fictícios.
+
+O cabeçalho oferece os temas Claro, Escuro e Alto contraste. A escolha e a ampliação de fonte persistem neste navegador entre páginas e sessões.
 
 ## Testes
 
@@ -45,6 +49,7 @@ npm.cmd test
 npm.cmd run test:api
 npm.cmd run test:flow
 npm.cmd run test:persistence
+npm.cmd run test:offline
 npm.cmd run test:restore
 npm.cmd run test:migrations
 npx.cmd playwright install chromium webkit
@@ -57,7 +62,7 @@ npm.cmd run test:budgets
 
 `test:e2e` executa Chromium e WebKit em sequência, cada um com API, banco, sessões e cotas próprios. Isso evita que um motor consuma os limites do outro. Os limites de segurança da aplicação continuam ativos. O resultado consolidado fica em `test-results/3.9/e2e-results.json`, com um relatório adicional por motor. Para investigar um cenário: `npm.cmd run test:e2e -- --project=chromium --grep "Agenda cria"`.
 
-A validação desta entrega, seus resultados e limitações estão em [RELATORIO_VALIDACAO.md](docs/RELATORIO_VALIDACAO.md).
+A [revisão de demonstração de 18/11/2026](docs/REVISAO_DEMONSTRACAO_2026-11-18.md) registra as correções atuais, testes e limites. O [relatório anterior](docs/RELATORIO_VALIDACAO.md) permanece como evidência histórica.
 
 ## Backup e recuperação
 

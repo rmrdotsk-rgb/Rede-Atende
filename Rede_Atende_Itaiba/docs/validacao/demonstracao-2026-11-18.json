@@ -1,0 +1,201 @@
+{
+  "schemaVersion": 1,
+  "reviewDate": "2026-11-18",
+  "repository": "rmrdotsk-rgb/Rede-Atende",
+  "branch": "correcoes/demonstracao-temas-acesso",
+  "baseCommit": "a0a193e25c2baa664b43d4c8196891eedb56ea95",
+  "testedCodeCommit": "5858dafeb96bd97b61f8c42047d930b72be3ff8f",
+  "testedCodeTree": "75c7896fb155243fc56b9504736a2343dbf77f43",
+  "runtime": {
+    "os": "Linux",
+    "node": "24.22.3",
+    "npm": "11.9.0",
+    "pglite": "0.4.6",
+    "playwright": "1.64.1",
+    "chromium": "153.0.8010.0",
+    "browserPackage": "@sparticuz/chromium 153.0.0 (somente ambiente de testes)"
+  },
+  "checks": [
+    {
+      "script": "test:static",
+      "exit": 0,
+      "seconds": 0.7,
+      "tests": 14,
+      "passed": 14
+    },
+    {
+      "script": "typecheck",
+      "exit": 0,
+      "seconds": 1.6
+    },
+    {
+      "script": "lint",
+      "exit": 0,
+      "seconds": 4.3
+    },
+    {
+      "script": "test",
+      "exit": 0,
+      "seconds": 1.7,
+      "tests": 155,
+      "passed": 155
+    },
+    {
+      "script": "test:api",
+      "exit": 0,
+      "seconds": 34.6,
+      "tests": 72,
+      "passed": 72
+    },
+    {
+      "script": "build",
+      "exit": 0,
+      "seconds": 5.1
+    },
+    {
+      "script": "test:persistence",
+      "exit": 0,
+      "seconds": 5.9
+    }
+  ],
+  "finalBuild": {
+    "command": "npm run build",
+    "exit": 0,
+    "note": "Build repetido após a última alteração da interface; ajustes posteriores foram apenas em testes e documentos."
+  },
+  "browser": {
+    "command": "npm run test:e2e -- --project=chromium",
+    "exit": 0,
+    "stats": {
+      "startTime": "2026-11-18T04:24:57.178Z",
+      "duration": 355436,
+      "expected": 87,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "isolatedProjects": [
+      "chromium"
+    ],
+    "themeWidths": [
+      360,
+      390,
+      768,
+      1366
+    ],
+    "themes": [
+      "light",
+      "dark",
+      "high-contrast"
+    ],
+    "newThemePageAudits": 84,
+    "newDialogAudits": 12,
+    "priorAttempts": [
+      {
+        "passed": 80,
+        "unexpected": 1,
+        "reason": "Conflito de arquivos de trace entre duas execuções concorrentes."
+      },
+      {
+        "passed": 86,
+        "unexpected": 1,
+        "reason": "Recarregamento de página durante análise de modal. Execução final feita sem editar os arquivos."
+      }
+    ]
+  },
+  "offline": {
+    "command": "npm run test:offline",
+    "exit": 0,
+    "origins": [
+      "http://127.0.0.1:3001",
+      "http://localhost:3001"
+    ],
+    "verified": [
+      "servidor parado e reiniciado",
+      "título offline substituído",
+      "sessão preservada",
+      "edição do gestor persistida e visível conforme a projeção do perfil",
+      "PDF com bytes preservados"
+    ],
+    "serviceWorkerChanged": false
+  },
+  "productionAudit": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0,
+    "total": 0
+  },
+  "darkPaletteContrast": [
+    {
+      "label": "Texto principal",
+      "foreground": "#f1f5f9",
+      "background": "#131d2e",
+      "contrast": 15.42,
+      "normal_text_AA": true
+    },
+    {
+      "label": "Texto secundário",
+      "foreground": "#cbd5e1",
+      "background": "#131d2e",
+      "contrast": 11.38,
+      "normal_text_AA": true
+    },
+    {
+      "label": "Link em destaque",
+      "foreground": "#93c5fd",
+      "background": "#172c46",
+      "contrast": 7.84,
+      "normal_text_AA": true
+    },
+    {
+      "label": "Texto de ação",
+      "foreground": "#0b1220",
+      "background": "#93c5fd",
+      "contrast": 10.38,
+      "normal_text_AA": true
+    },
+    {
+      "label": "Sucesso",
+      "foreground": "#a7f3d0",
+      "background": "#10382e",
+      "contrast": 10.06,
+      "normal_text_AA": true
+    },
+    {
+      "label": "Aviso",
+      "foreground": "#fde68a",
+      "background": "#3b2c16",
+      "contrast": 10.82,
+      "normal_text_AA": true
+    },
+    {
+      "label": "Erro",
+      "foreground": "#fecdd3",
+      "background": "#431d2c",
+      "contrast": 10.26,
+      "normal_text_AA": true
+    }
+  ],
+  "captures": [
+    {
+      "path": "capturas/acesso-restrito-360.png",
+      "sha256": "b3a266697087765baf685cd92e63516c4c7fa6625e9e9a27974f86d1065466d8"
+    },
+    {
+      "path": "capturas/tema-escuro-gestao-1366.png",
+      "sha256": "d8bd4d8e6ca6024b102c7a7c45939755bf19557a7de13673d2dcd7971c0b1be9"
+    }
+  ],
+  "unverified": [
+    "Windows 11 físico",
+    "Brave",
+    "Safari/WebKit",
+    "iPhone físico",
+    "leitor de tela",
+    "PostgreSQL externo",
+    "banco e vídeo da apresentação anterior"
+  ],
+  "publicInternetDeployment": false
+}

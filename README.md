@@ -10,6 +10,8 @@ Desenvolvido para a disciplina **Front-End Frameworks**, da **UNINASSAU**, com o
 
 Para uma visão resumida, veja [Resumo da entrega](ENTREGA_ACADEMICA.md) e [Histórias de usuário](Rede_Atende_Itaiba/docs/HISTORIAS_DE_USUARIO.md).
 
+A [revisão de demonstração de 18/11/2026](Rede_Atende_Itaiba/docs/REVISAO_DEMONSTRACAO_2026-11-18.md) reúne as correções de acesso, temas e contas locais, com testes e capturas. Para preparar o notebook, consulte o [guia de acessos e execução no Windows](Rede_Atende_Itaiba/docs/ACESSOS_LOCAIS.md).
+
 ## Como funciona
 
 O cidadão se cadastra, escolhe uma escola e uma categoria, descreve o problema e recebe um número de protocolo. Depois, pode acompanhar o andamento, enviar informações complementares e avaliar a conclusão.
@@ -77,7 +79,7 @@ npm.cmd start
 - `npm.cmd run build` verifica e compila a aplicação.
 - `npm.cmd start` inicia o servidor que entrega a interface e a API.
 
-Abra **http://localhost:3001** no navegador, mantendo o terminal aberto. Para encerrar, pressione **Ctrl+C**.
+Abra **http://127.0.0.1:3001** no navegador, mantendo o terminal aberto. Para encerrar, pressione **Ctrl+C**.
 
 **Alternativa:** na pasta do projeto, execute `INICIAR_REDE_ATENDE.cmd`. O iniciador foi criado para preparar e abrir o ambiente local.
 
