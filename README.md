@@ -125,6 +125,21 @@ Os testes de API podem gerar o build automaticamente. Para conferências adicion
 
 **Se aparecer “Execute npm run build antes de npm start”**, rode `npm.cmd run build` e depois `npm.cmd start`.
 
+### Se a aplicação não abrir
+
+Abra o PowerShell na pasta `Rede_Atende_Itaiba`, onde estão `package.json` e `package-lock.json`. Se aparecer `tsc não é reconhecido` ou `Cannot find package 'tsx'`, a instalação das dependências não foi concluída. Execute:
+
+```powershell
+npm.cmd ci
+npm.cmd run setup -- --embedded
+npm.cmd run build
+npm.cmd start
+```
+
+Só avance para o próximo comando quando o anterior terminar sem erro. Mantenha o terminal de `npm.cmd start` aberto durante a demonstração.
+
+Se o navegador mostrar **“Sem conexão com o atendimento”**, confirme primeiro que o servidor está aberto. Em outro PowerShell, execute `Invoke-WebRequest http://127.0.0.1:3001 -UseBasicParsing`. Uma resposta HTTP 200 indica que o servidor respondeu; nesse caso, tente abrir `http://127.0.0.1:3001` no navegador. Isso evita uma página offline antiga que pode ter sido armazenada na origem `localhost`. A página offline, isoladamente, não indica falta de internet.
+
 ## Organização das pastas
 
 Todo o aplicativo fica em **`Rede_Atende_Itaiba/`**:
