@@ -4,7 +4,11 @@ O **Rede Atende** é um projeto acadêmico voltado ao registro e acompanhamento 
 
 Desenvolvido para a disciplina **Front-End Frameworks**, da **UNINASSAU**, com orientação do professor **Rafael Pacheco Ferreira**, a partir do desafio educacional de Itaíba (DesafioPE).
 
-**Equipe:** Itallo Thiago Herculano da Silva, Raimundo Anthoni Carvalho Alves Cruz e José Emerson Alves Saturno Barboza.
+## Equipe:
+Itallo Thiago Herculano da Silva - 01800305
+José Emerson Alves Saturno Barboza - 01802056
+José Matheus Silva de Souza - 01777023
+Raimundo Anthoni Carvalho Alves Cruz - 01797472
 
 > **Projeto de demonstração.** Os dados e as contas usadas nos testes são fictícios. O Rede Atende não é um serviço oficial da Prefeitura de Itaíba, não encaminha solicitações reais e não possui integração oficial com o SEI.
 
