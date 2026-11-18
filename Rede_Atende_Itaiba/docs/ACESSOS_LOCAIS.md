@@ -1,55 +1,75 @@
-# Acessos locais da demonstração
+# Contas e senhas para a demonstração
 
-As quatro contas fictícias usam e-mail como identificador: `gestor@redeatende.invalid`, `operador@redeatende.invalid`, `auditor@redeatende.invalid` e `cidadao@redeatende.invalid`. Os IDs são gerados uma vez e preservados no banco. Nenhuma senha é publicada na interface ou neste repositório.
+O sistema possui quatro contas de exemplo com estes nomes de usuário:
 
-## Primeira instalação no Windows
+| Usuário para entrar | Perfil |
+| --- | --- |
+| `gestor` | Administração |
+| `cidadao` | Comunidade |
+| `operador` | Equipe |
+| `auditor` | Consulta |
 
-Abra no VS Code a pasta **Rede_Atende_Itaiba**, onde está `package.json`, e use o terminal PowerShell:
+Os identificadores são fixos. O banco continua guardando os mesmos registros de usuário de versões anteriores; por isso os pedidos e permissões não são perdidos. O cadastro público cria somente cidadãos e exige e-mail.
+
+## Primeira instalação
+
+Na pasta `Rede_Atende_Itaiba`, execute:
 
 ```powershell
-Get-Location
-Test-Path .\package.json
-node --version
 npm.cmd ci
 npm.cmd run setup -- --embedded
 npm.cmd run build
 npm.cmd start
 ```
 
-`Test-Path` deve retornar `True`. Use Node 24.11 ou superior, conforme a faixa de versões do projeto. Abra **http://127.0.0.1:3001** e mantenha o terminal aberto. Para encerrar, pressione **Ctrl+C**. Nas próximas aberturas, entre na mesma pasta e execute `npm.cmd start`; se alterar os fontes, execute `npm.cmd run build` antes.
+A preparação cria o banco PGlite local e salva as senhas geradas em `.local/demo-access.txt`. Leia esse arquivo em particular, sem compartilhar a tela. As senhas permanecem válidas quando o servidor é reiniciado.
 
-O primeiro setup gera senhas aleatórias de forma automática e grava uma cópia em `.local/demo-access.txt`. Consulte esse arquivo **em particular**, antes de compartilhar a tela. Ele e `.env` são ignorados pelo Git. No Linux/macOS, a gravação usa permissão `0600`; no Windows, a proteção adicional depende das permissões NTFS da pasta do usuário. Não coloque esses arquivos em pastas compartilhadas nem os inclua no ZIP.
+Se quiser **escolher as senhas antes da primeira instalação**, crie manualmente o arquivo `.env` dentro de `Rede_Atende_Itaiba` com estas configurações e os valores escolhidos por você:
 
-Para escolher as senhas antes do primeiro setup, copie `.env.example` para `.env`, escolha `DB_MODE=embedded` e preencha localmente `SEED_GESTOR_PASSWORD`, `SEED_OPERADOR_PASSWORD`, `SEED_AUDITOR_PASSWORD` e `SEED_CIDADAO_PASSWORD`. Use valores próprios de 12 a 128 caracteres, sem quebra de linha. No PostgreSQL, preserve `DB_MODE=postgres` e sua `DATABASE_URL` em vez de solicitar o modo portátil.
-
-## Atualizações e reinício
-
-Repetir setup **não troca a senha de uma conta existente**, mesmo se uma variável `SEED_*_PASSWORD` mudar. O login válido continua sendo o que corresponde ao hash já salvo no banco. Também não gera uma senha nova para substituir uma cópia perdida do arquivo de acessos. Preserve `.env`, `.local`, anexos e banco ao atualizar os fontes.
-
-Para backup do banco portátil, pare a API com Ctrl+C e execute `npm.cmd run db:backup`. Guarde também uma cópia privada da configuração antes de editar `.env`. Nunca compartilhe os backups: eles contêm dados e hashes de senha.
-
-## Recuperar uma senha perdida
-
-Este procedimento é reservado ao responsável com acesso ao computador e ao banco da demonstração. Não existe rota pública de recuperação administrativa.
-
-1. Pare o servidor com **Ctrl+C**. Confirme que outra janela não mantém a API aberta.
-2. Faça uma cópia privada de `.env`. Edite no próprio VS Code a variável da conta desejada, por exemplo `SEED_GESTOR_PASSWORD`, com a nova senha de 12 a 128 caracteres. Não cole a senha em comandos, chats ou gravações.
-3. Confira a configuração do banco que será usado e execute a confirmação explícita:
-
-```powershell
-npm.cmd run demo:reset-password -- --email gestor@redeatende.invalid --confirm
+```dotenv
+DB_MODE=embedded
+PORT=3001
+COOKIE_SECURE=false
+SERVE_FRONTEND=false
+SEED_GESTOR_PASSWORD=ESCOLHA_UMA_SENHA_DE_12_OU_MAIS_CARACTERES
+SEED_CIDADAO_PASSWORD=ESCOLHA_OUTRA_SENHA_DE_12_OU_MAIS_CARACTERES
 ```
 
-O comando gera um backup privado **antes** de alterar o hash, mantém ID/perfil/solicitações, invalida as sessões da conta e registra `demo.password.reset` na auditoria. Ele recusa conta fora dos quatro e-mails fictícios, senha inválida, falta de `--confirm` ou falha no backup. O lock do PGlite impede execução com a API portátil em uso. Para PostgreSQL externo, o responsável também deve parar a API antes de executar o procedimento.
+Substitua os textos após `=` por senhas de 12 a 128 caracteres. Você pode incluir `SEED_OPERADOR_PASSWORD` e `SEED_AUDITOR_PASSWORD` do mesmo modo. Depois execute `npm.cmd run setup -- --embedded` e os comandos de compilação e início.
 
-4. O arquivo privado de acessos passa a refletir a nova senha. Inicie com `npm.cmd start` e entre novamente. Se o arquivo estiver indisponível após uma falha de disco/permissão, consulte o resultado do comando e o banco antes de repetir; ele não apaga solicitações.
+**Não salve as senhas no código, no README ou no repositório**, mesmo que ele seja privado. O Git ignora `.env`, `.local`, bancos locais e arquivos de backup.
 
-Altere o e-mail e a variável correspondente para recuperar operador, auditor ou cidadão. Não use esse comando para criar uma conta nova ou mudar permissões. Para voltar à senha anterior, configure-a em particular e execute novamente o mesmo procedimento explícito.
+## Trocar uma senha de uma instalação existente
 
-## Duas sessões para apresentar
+Modificar `SEED_GESTOR_PASSWORD` ou `SEED_CIDADAO_PASSWORD` no `.env` **não troca a senha de uma conta que já foi cadastrada**. Para alterá-la sem apagar dados:
 
-Use o cidadão na janela normal e o gestor numa janela privada. Mantenha ambas em **http://127.0.0.1:3001**: `localhost` e `127.0.0.1` são origens diferentes, com cookies, preferências e cache próprios. O banco do servidor é o mesmo quando apontam para a mesma instância.
+1. Pare o servidor com **Ctrl+C**.
+2. Abra `.env` e defina a nova senha na variável `SEED_GESTOR_PASSWORD` ou `SEED_CIDADAO_PASSWORD`.
+3. No terminal da pasta do aplicativo, execute o comando correspondente:
 
-Em **Tema de cores**, escolha **Claro**, **Escuro** ou **Alto contraste**; no celular, o seletor fica no botão de opções do cabeçalho. A escolha e o tamanho de fonte pertencem ao navegador e não alteram o perfil da conta. Preferências de uma janela privada normalmente são descartadas quando ela é encerrada.
+```powershell
+npm.cmd run demo:reset-password -- --login gestor --confirm
+npm.cmd run demo:reset-password -- --login cidadao --confirm
+```
 
-Um cidadão que abrir `/admin` encontra a página de acesso restrito e pode voltar à comunidade ou encerrar a sessão para entrar com uma conta da equipe. O auditor permanece em consulta; somente as permissões existentes do servidor autorizam alterações.
+Execute apenas o comando da conta cuja senha deseja trocar. O sistema faz um backup antes da mudança, encerra as sessões antigas da conta e preserva seus dados, protocolos e permissões. Se houver erro no backup, o reset é cancelado. O mesmo procedimento serve para `operador` e `auditor`.
+
+Para consultar a cópia privada de senhas, com a tela não compartilhada:
+
+```powershell
+notepad .\.local\demo-access.txt
+```
+
+Em instalações antigas, o arquivo pode mostrar os identificadores anteriores em formato de e-mail. Os nomes curtos funcionam com a mesma senha. Executar o setup da versão atual normaliza a apresentação do arquivo quando ele existe.
+
+## Usar duas contas ao mesmo tempo
+
+Abra **http://127.0.0.1:3001** na janela normal do navegador para `cidadao` e numa janela anônima para `gestor`. Isso mantém as sessões separadas.
+
+Evite alternar entre `localhost` e `127.0.0.1`, pois os navegadores tratam os dois endereços como origens diferentes. Para encerrar o servidor, use Ctrl+C. Nas próximas execuções, use `npm.cmd start`.
+
+## Cuidados ao atualizar o ZIP
+
+Guarde `.env` e toda a pasta `.local`. Eles não vêm no ZIP do GitHub. Ao baixar uma versão nova, copie apenas os arquivos de código para sua instalação existente, mantendo seus dados; ou preserve uma cópia privada e teste o novo projeto em outra pasta. Não apague o banco para tentar corrigir um login.
+
+Para usar PostgreSQL externo, consulte `.env.example` e o README. Não execute `setup -- --embedded` sobre uma instalação já configurada para PostgreSQL.

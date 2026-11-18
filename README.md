@@ -1,182 +1,89 @@
 # Rede Atende
 
-O **Rede Atende** é um projeto acadêmico voltado ao registro e acompanhamento de demandas da educação em **Itaíba, Pernambuco**. A proposta é reunir em um único sistema os pedidos da comunidade e o trabalho de triagem e atendimento da equipe responsável.
-
-Desenvolvido para a disciplina **Front-End Frameworks**, da **UNINASSAU**, com orientação do professor **Rafael Pacheco Ferreira**, a partir do desafio educacional de Itaíba (DesafioPE).
+Projeto da disciplina **Front-End Frameworks**, UNINASSAU, orientado pelo professor **Rafael Pacheco Ferreira**.
 
 **Equipe:** Itallo Thiago Herculano da Silva, Raimundo Anthoni Carvalho Alves Cruz e José Emerson Alves Saturno Barboza.
 
-> **Projeto de demonstração.** Os dados e as contas usadas nos testes são fictícios. O Rede Atende não é um serviço oficial da Prefeitura de Itaíba, não encaminha solicitações reais e não possui integração oficial com o SEI.
+O Rede Atende é um protótipo para registrar e acompanhar demandas relacionadas à educação de Itaíba (PE). O cidadão abre um pedido e acompanha o protocolo; a equipe organiza a triagem, os serviços, os prazos e a conclusão.
 
-Para uma visão resumida, veja [Resumo da entrega](ENTREGA_ACADEMICA.md) e [Histórias de usuário](Rede_Atende_Itaiba/docs/HISTORIAS_DE_USUARIO.md).
+É uma demonstração acadêmica, não um serviço da Prefeitura. Os dados devem ser fictícios, e a integração com o SEI é simulada.
 
-A [revisão de demonstração de 18/11/2026](Rede_Atende_Itaiba/docs/REVISAO_DEMONSTRACAO_2026-11-18.md) reúne as correções de acesso, temas e contas locais, com testes e capturas. Para preparar o notebook, consulte o [guia de acessos e execução no Windows](Rede_Atende_Itaiba/docs/ACESSOS_LOCAIS.md).
+## Baixar e executar no Windows
 
-## Como funciona
+Acesse [o repositório](https://github.com/rmrdotsk-rgb/Rede-Atende), selecione **Code → Download ZIP**, extraia o arquivo e abra a pasta **Rede_Atende_Itaiba**. Como o repositório é privado, é necessário estar autorizado no GitHub.
 
-O cidadão se cadastra, escolhe uma escola e uma categoria, descreve o problema e recebe um número de protocolo. Depois, pode acompanhar o andamento, enviar informações complementares e avaliar a conclusão.
+É preciso ter **Node.js 24.11 ou superior** (ou Node 22.18+) e **npm 10 ou superior**. Na primeira instalação, também é necessário acesso à internet para baixar as dependências. Não é preciso instalar PostgreSQL.
 
-No ambiente de gestão, a equipe recebe as demandas, faz a triagem, define responsáveis, acompanha prazos e registra os atendimentos. Também existem ordens de serviço, agenda, relatórios e uma simulação de integração com o SEI.
+**Forma mais simples:** dê dois cliques em `INICIAR_REDE_ATENDE.cmd` dentro da pasta `Rede_Atende_Itaiba`. Ele verifica as dependências, prepara o banco local, compila e inicia o sistema.
 
-**Perfis disponíveis:**
-
-- **Cidadão:** cadastro, solicitação, acompanhamento e avaliação.
-- **Operador:** acompanhamento e execução das tarefas de atendimento conforme as permissões do sistema.
-- **Gestor:** triagem, despacho, acompanhamento da equipe e relatórios.
-- **Auditor:** consulta dos registros, sem permissão para alterar as demandas.
-
-## Tecnologias
-
-- **Interface:** React, TypeScript, Vite e Tailwind CSS.
-- **Servidor:** Node.js e Fastify, com API em `/api/v1`.
-- **Banco de dados:** PGlite para execução local; PostgreSQL externo é opcional.
-- **Testes:** testes automatizados de regras de negócio, API e navegador com Playwright.
-
-O projeto possui interface web adaptada para computador e celular. **Não utiliza Expo Go.**
-
-## Requisitos para executar
-
-- Windows 11, ou outro sistema compatível com as ferramentas utilizadas.
-- **Node.js 24.11 ou superior**, ou uma versão compatível da linha **22.18+**. O projeto também exige **npm 10+**.
-- Conexão com a internet na primeira instalação para baixar as dependências.
-- VS Code é recomendado, mas não obrigatório.
-- Git é necessário para clonar e contribuir; não é necessário instalar PostgreSQL para usar o banco portátil.
-
-Confira as versões instaladas:
+**Pelo terminal:** abra essa mesma pasta no VS Code e execute no PowerShell:
 
 ```powershell
 node --version
-npm --version
-git --version
-```
-
-## Instalação no Windows
-
-### 1. Baixar e abrir o projeto
-
-Para quem ainda não tem o código:
-
-```powershell
-git clone https://github.com/rmrdotsk-rgb/Rede-Atende.git
-cd Rede-Atende\Rede_Atende_Itaiba
-```
-
-Como o repositório é **privado**, é preciso ter sido convidado e estar autenticado no GitHub. Quem já tem uma cópia local pode simplesmente abrir a pasta **`Rede_Atende_Itaiba`**, onde fica o `package.json`.
-
-### 2. Preparar o ambiente
-
-Abra um terminal PowerShell nessa pasta e execute, em ordem:
-
-```powershell
 npm.cmd ci
 npm.cmd run setup -- --embedded
 npm.cmd run build
 npm.cmd start
 ```
 
-- `npm.cmd ci` instala exatamente as dependências do projeto.
-- `npm.cmd run setup -- --embedded` prepara o banco local e cria as contas fictícias. Use na primeira configuração; não é necessário repetir ao iniciar normalmente.
-- `npm.cmd run build` verifica e compila a aplicação.
-- `npm.cmd start` inicia o servidor que entrega a interface e a API.
+Abra **http://127.0.0.1:3001**. Mantenha o terminal aberto durante o uso; para encerrar, pressione **Ctrl+C**. Nas próximas execuções, normalmente basta `npm.cmd start`, sem reinstalar ou recriar o banco.
 
-Abra **http://127.0.0.1:3001** no navegador, mantendo o terminal aberto. Para encerrar, pressione **Ctrl+C**.
+## Entrar no sistema
 
-**Alternativa:** na pasta do projeto, execute `INICIAR_REDE_ATENDE.cmd`. O iniciador foi criado para preparar e abrir o ambiente local.
+As contas de apresentação aceitam nomes de usuário simples:
 
-Nas próximas execuções, se o build já estiver pronto, normalmente basta executar `npm.cmd start`.
+| Usuário | Perfil | Pode fazer |
+| --- | --- | --- |
+| `gestor` | Administração | Gerenciar demandas, serviços e relatórios |
+| `cidadao` | Comunidade | Criar, acompanhar e avaliar as próprias demandas |
+| `operador` | Equipe | Triagem e execução das tarefas permitidas |
+| `auditor` | Consulta | Consultar dados sem alterar solicitações |
 
-### 3. Acessar os perfis de demonstração
+As senhas são definidas na instalação ou geradas automaticamente. Elas ficam apenas no computador, em `Rede_Atende_Itaiba/.local/demo-access.txt`, e continuam válidas entre reinicializações. É possível entrar também com e-mail em contas cadastradas pelo formulário.
 
-O programa gera os dados de acesso em:
+Para escolher senhas fixas ou recuperá-las sem apagar o banco, siga [Acessos locais](Rede_Atende_Itaiba/docs/ACESSOS_LOCAIS.md). **Nunca envie `.env`, `.local`, banco, anexos privados ou senhas ao GitHub.**
 
-```text
-Rede_Atende_Itaiba/.local/demo-access.txt
-```
+## Apresentação
 
-Abra esse arquivo **somente no seu computador** e utilize o e-mail e a senha do perfil desejado na página **Entrar**. É possível também criar um cadastro fictício de cidadão na própria interface.
+1. Entre como `cidadao` e registre uma solicitação com escola, categoria e descrição fictícias.
+2. Copie o protocolo gerado e abra o acompanhamento.
+3. Em uma janela anônima, entre como `gestor` e localize esse protocolo em **Demandas**.
+4. Faça a triagem, registre o atendimento e conclua o processo respeitando as etapas obrigatórias.
+5. Retorne ao cidadão, confira o histórico e avalie o atendimento.
 
-**Não compartilhe nem envie para o GitHub** o arquivo de senhas, o `.env`, os bancos locais ou os anexos de teste gerados durante a execução.
+Roteiro completo: [Demonstração](Rede_Atende_Itaiba/docs/ROTEIRO_DEMONSTRACAO_ATUAL.md).
 
-## Testar o fluxo principal
+## Testes
 
-1. Entre como cidadão e registre uma solicitação fictícia, escolhendo escola e categoria.
-2. Guarde o protocolo gerado e abra a página de acompanhamento.
-3. Em outra janela de navegador (ou janela anônima), entre como gestor.
-4. Localize o protocolo, faça a triagem, atribua responsável e registre o atendimento.
-5. Volte à conta do cidadão, confira a atualização do protocolo e avalie a conclusão.
-
-Uma descrição completa dos passos está em [Roteiro de demonstração](Rede_Atende_Itaiba/docs/ROTEIRO_DEMONSTRACAO_ATUAL.md).
-
-## Testes e manutenção
-
-Na pasta `Rede_Atende_Itaiba`, execute os testes mais importantes:
+Na pasta `Rede_Atende_Itaiba`:
 
 ```powershell
+npm.cmd run test:static
 npm.cmd run typecheck
 npm.cmd run lint
 npm.cmd test
 npm.cmd run test:api
+npm.cmd run test:budgets
 ```
 
-Para os testes de navegação, instale os navegadores utilizados pelo Playwright e execute a suíte:
+Para os testes no navegador:
 
 ```powershell
-npx.cmd playwright install chromium webkit
-npm.cmd run test:e2e
+npx.cmd playwright install chromium
+npm.cmd run test:e2e -- --project=chromium
 ```
 
-Os testes de API podem gerar o build automaticamente. Para conferências adicionais de banco, backup e desempenho, consulte o [guia de testes no Windows](Rede_Atende_Itaiba/docs/COMO_TESTAR_NO_WINDOWS.md).
+O projeto também possui testes de persistência, backup e restauração. Veja [Como testar no Windows](Rede_Atende_Itaiba/docs/COMO_TESTAR_NO_WINDOWS.md). Os testes automatizados do GitHub ficam na aba **Actions**.
 
-**Se aparecer “Execute npm run build antes de npm start”**, rode `npm.cmd run build` e depois `npm.cmd start`.
+## Estrutura
 
-### Se a aplicação não abrir
+- `Rede_Atende_Itaiba/src/`: telas React, componentes e regras da interface.
+- `Rede_Atende_Itaiba/server/`: API Fastify, permissões e banco de dados.
+- `Rede_Atende_Itaiba/scripts/`: instalação, inicialização e manutenção.
+- `Rede_Atende_Itaiba/tests/`: testes de navegação e regressão.
+- `Rede_Atende_Itaiba/docs/`: documentação técnica e referências.
+- `Rede_Atende_Itaiba/public/`: ícones e recursos da aplicação.
 
-Abra o PowerShell na pasta `Rede_Atende_Itaiba`, onde estão `package.json` e `package-lock.json`. Se aparecer `tsc não é reconhecido` ou `Cannot find package 'tsx'`, a instalação das dependências não foi concluída. Execute:
+O frontend utiliza React, TypeScript, Vite e Tailwind CSS. O banco local é PGlite, com opção de PostgreSQL externo. A aplicação é web/PWA responsiva, não um aplicativo Android/iOS nativo.
 
-```powershell
-npm.cmd ci
-npm.cmd run setup -- --embedded
-npm.cmd run build
-npm.cmd start
-```
-
-Só avance para o próximo comando quando o anterior terminar sem erro. Mantenha o terminal de `npm.cmd start` aberto durante a demonstração.
-
-Se o navegador mostrar **“Sem conexão com o atendimento”**, confirme primeiro que o servidor está aberto. Em outro PowerShell, execute `Invoke-WebRequest http://127.0.0.1:3001 -UseBasicParsing`. Uma resposta HTTP 200 indica que o servidor respondeu; nesse caso, tente abrir `http://127.0.0.1:3001` no navegador. Isso evita uma página offline antiga que pode ter sido armazenada na origem `localhost`. A página offline, isoladamente, não indica falta de internet.
-
-## Organização das pastas
-
-Todo o aplicativo fica em **`Rede_Atende_Itaiba/`**:
-
-| Pasta ou arquivo | Conteúdo |
-| --- | --- |
-| `src/` | Páginas, componentes, estilos, regras e serviços da interface |
-| `server/` | API, autenticação, banco e migrações |
-| `scripts/` | Inicialização, preparação e verificações |
-| `tests/` | Testes automatizados |
-| `public/` | Ícones e recursos da aplicação |
-| `docs/` | Regras de uso, referências, API e roteiro da apresentação |
-| `package.json` | Dependências e comandos do projeto |
-
-## Trabalhar em equipe
-
-O código principal fica na branch `main`. Para evitar que uma alteração de um integrante atrapalhe o trabalho dos outros:
-
-1. Aceite o convite para colaborar e clone o repositório.
-2. Antes de começar, atualize a cópia local com `git pull origin main`.
-3. Crie uma branch para a tarefa, por exemplo: `git switch -c ajuste-formulario`.
-4. Faça alterações pequenas e rode os testes relacionados.
-5. Envie a branch com `git push -u origin ajuste-formulario` e abra um **Pull Request** para revisão antes de integrar à `main`.
-
-Não envie `node_modules`, `dist`, `.env`, dados do banco, senhas ou arquivos temporários.
-
-## Documentação
-
-- [README técnico da aplicação](Rede_Atende_Itaiba/README.md)
-- [Funcionalidades e rotas](Rede_Atende_Itaiba/docs/FUNCIONALIDADES.md)
-- [Como testar no Windows](Rede_Atende_Itaiba/docs/COMO_TESTAR_NO_WINDOWS.md)
-- [Roteiro de apresentação](Rede_Atende_Itaiba/docs/ROTEIRO_DEMONSTRACAO_ATUAL.md)
-- [API REST](Rede_Atende_Itaiba/docs/API_REST.md)
-- [Fontes e referências de Itaíba](Rede_Atende_Itaiba/docs/FONTES_MUNICIPAIS_ITAIBA.md)
-
-O sistema é um protótipo acadêmico. Para uso público real seriam necessários infraestrutura, homologação, governança de dados e integrações oficiais que não fazem parte desta entrega.
+Se o sistema não abrir, confira se o terminal continua executando `npm.cmd start` e se está acessando **127.0.0.1:3001**. Se aparecer mensagem de build ausente, execute `npm.cmd run build` e inicie novamente. **Não apague a pasta `.local` para resolver erros:** ela contém os dados e as contas já criadas.

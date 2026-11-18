@@ -113,6 +113,14 @@ test('setup repetido preserva IDs, hashes e o arquivo das senhas realmente cadas
   );
 });
 
+test('setup atualiza a apresentação dos usuários no arquivo de uma instalação antiga', async () => {
+  const original = await readFile(accessFile, 'utf8');
+  const legacy = original.replace(/^gestor: gestor$/m, 'gestor: gestor@redeatende.invalid');
+  await import('node:fs/promises').then(({ writeFile }) => writeFile(accessFile, legacy));
+  await recordDemoAccess([]);
+  assert.equal(await readFile(accessFile, 'utf8'), original);
+});
+
 test('arquivo privado limita permissões e não inventa acessos se a cópia local for perdida', async () => {
   await chmod(accessFile, 0o644);
   await recordDemoAccess([{ role: 'cidadao', password: originalPassword }]);

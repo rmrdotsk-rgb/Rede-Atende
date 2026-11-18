@@ -1,0 +1,40 @@
+name: Testes do Rede Atende
+
+on:
+  push:
+    branches: [main, correcoes/demonstracao-temas-acesso]
+  pull_request:
+    branches: [main]
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: Rede_Atende_Itaiba
+    steps:
+      - name: Baixar código
+        uses: actions/checkout@v4
+      - name: Preparar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24.22.3'
+          cache: npm
+          cache-dependency-path: Rede_Atende_Itaiba/package-lock.json
+      - name: Instalar dependências
+        run: npm ci
+      - name: Testes estáticos
+        run: npm run test:static
+      - name: Conferir tipos e estilo
+        run: npm run lint
+      - name: Testes de regras de negócio
+        run: npm test
+      - name: Testes de API e build
+        run: npm run test:api
+      - name: Limites do build
+        run: npm run test:budgets
+      - name: Instalar Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Testes no navegador
+        run: npm run test:e2e -- --project=chromium

@@ -12,7 +12,22 @@ export async function recordDemoAccess(entries: { role: Role; password: string }
   const path = process.env.SEED_ACCESS_FILE ?? '.local/demo-access.txt';
   if (!entries.length) {
     try {
-      await chmod(path, 0o600);
+      const existing = await readFile(path, 'utf8');
+      const normalized = existing.replace(
+        /^(gestor|operador|auditor|cidadao): \1@redeatende\.invalid(?=\r?$)/gm,
+        '$1: $1',
+      );
+      if (normalized !== existing) {
+        const file = await open(path, 'w', 0o600);
+        try {
+          await chmod(path, 0o600);
+          await file.writeFile(normalized);
+        } finally {
+          await file.close();
+        }
+      } else {
+        await chmod(path, 0o600);
+      }
     } catch (error) {
       if ((error as NodeJS.ErrnoException).code !== 'ENOENT') throw error;
     }

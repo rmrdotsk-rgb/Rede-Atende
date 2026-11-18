@@ -1,40 +1,18 @@
-# Apresentação ao professor Rafael — Rede Atende
+# Roteiro de apresentação — Rede Atende
 
-**Meta: 5–8 minutos, com dados fictícios e duas sessões independentes.** Prepare `npm.cmd run setup -- --embedded`, `npm.cmd run build` e `npm.cmd start`. Abra http://127.0.0.1:3001. Use cidadão e gestor em perfis separados; senhas geradas ficam só no computador. Não exiba `.local/demo-access.txt` na gravação.
+Duração sugerida: **6 a 8 minutos**. Use apenas dados fictícios.
 
-| Etapa                  | Ação simples                                                                                                                                  | Resultado observável                                                                                         |
-| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| 1 · Contexto           | Mostrar Início e Como funciona                                                                                                                | Projeto de Itaíba da UNINASSAU, disciplina de Rafael; fontes municipais e limites acadêmicos                 |
-| 2 · Cidadão móvel      | Escolher escola, Infraestrutura/Hidráulico, assunto “Bebedouro — demonstração em sala”, relato/local fictícios; anexar fixture PNG se desejar | Formulário aceita dados válidos; escola começa vazia                                                         |
-| 3 · Comprovante        | Enviar e copiar protocolo; abrir acompanhamento e recarregar                                                                                  | Um único protocolo do servidor, mesmo relato e anexo após recarga                                            |
-| 4 · Gestor no notebook | Localizar exatamente o protocolo em Demandas → Despachar (no celular, usar o cartão); indicar setor/responsável; pedir complemento público    | A pergunta aparece no acompanhamento do titular                                                              |
-| 5 · Complemento        | Cidadão responde; gestor atualiza                                                                                                             | Resposta persistida, retorno à triagem e histórico preservado                                                |
-| 6 · Execução           | Gestor cria OS obrigatória; encaminha e atende; tenta concluir com OS pendente                                                                | Bloqueio explica a obrigação; depois de concluir a OS com serviço realizado, pedido aceita providência final |
-| 7 · Retorno            | Cidadão consulta a solução e avalia uma vez                                                                                                   | Avaliação gravada e exibida nos indicadores                                                                  |
-| 8 · Correção           | Em um segundo pedido de Outros, abrir Corrigir categoria e escolher Infraestrutura com campos/motivo                                          | Protocolo mantido; titular vê nova categoria; motivo e campos anteriores ficam no histórico interno          |
-| 9 · Gestão             | Mostrar relatório/CSV e uma vinculação SEI simulada elegível                                                                                  | Contagens do banco e identificação explícita da simulação                                                    |
-| 10 · Retomada          | Ctrl+C e `npm.cmd start`; reabrir o protocolo                                                                                                 | Dados e bytes do anexo permanecem                                                                            |
+Antes da aula, inicie `npm.cmd start` na pasta `Rede_Atende_Itaiba`. Abra **http://127.0.0.1:3001**. O cidadão pode ficar na janela normal e o gestor em uma janela anônima.
 
-Se incluir vistoria, criar data futura com horário disponível; realizar ou cancelar com motivo antes de concluir. Uma colisão deve ser recusada. Para caber em oito minutos, prepare o segundo cenário antes, sem simular as operações ao vivo.
+1. **Apresentar o projeto (40 s).** Explique que é um protótipo para demandas da educação de Itaíba e que não envia pedidos reais à Prefeitura.
+2. **Entrar como `cidadao` (40 s).** Mostre a página de acompanhamento e a navegação adaptada ao celular.
+3. **Registrar a solicitação (1 min e 30 s).** Escolha uma escola e uma categoria, descreva uma situação fictícia, anexe um arquivo de teste se desejar e envie. Anote o protocolo exibido.
+4. **Conferir o registro (40 s).** Recarregue o acompanhamento e confirme que o protocolo continua salvo.
+5. **Entrar como `gestor` (1 min).** Na outra janela, abra Gestão → Demandas e pesquise o mesmo protocolo. Mostre a triagem, prioridade, setor e responsável.
+6. **Atualizar o atendimento (1 min e 30 s).** Registre as informações e uma ordem de serviço quando exigida pela categoria. Conclua as etapas obrigatórias antes de finalizar a demanda.
+7. **Mostrar o resultado (40 s).** Volte ao cidadão, recarregue, confira o histórico público e realize a avaliação, se o pedido estiver concluído.
+8. **Encerrar (40 s).** Apresente rapidamente o relatório e informe que a integração com o SEI é simulada.
 
-O roteiro detalhado está em [COMO_TESTAR_NO_WINDOWS.md](COMO_TESTAR_NO_WINDOWS.md). Antes da apresentação, execute os testes de persistência e restauração descritos nesse guia. Se não houver telefone, informe que a apresentação usa emulação. Não diga que houve teste físico no iPhone/Windows.
+As senhas das contas de demonstração estão apenas no arquivo privado `.local/demo-access.txt`; não o abra durante a apresentação. Confira antes os acessos e o procedimento de recuperação no [guia de contas](ACESSOS_LOCAIS.md).
 
-O desafio oficial vai além deste recorte: exige aplicativo móvel Android e/ou iOS, painel e integração nativa com SEI. Aqui há web/PWA, painel e SEI simulado. O site não opera atendimento municipal.
-
-## Conferência adicional desta entrega
-
-No celular, localize Entrar/Sair e abra o botão de opções para acessibilidade e notificações. Preencha parte de uma nova solicitação fictícia, tente voltar ao início e escolha Continuar preenchendo. Mostre que os campos permanecem; depois escolha descartar ou conclua o envio. Não apresente os indicadores e avisos como atividade real do município.
-
-Windows/iPhone físicos, Safari, leitores de tela e teste moderado com pessoas dependem de execução específica no ambiente disponível.
-
-## Sequência curta de 6–8 minutos
-
-1. **0:00–0:45:** apresentar o recorte acadêmico e escolher o tema desejado; o alto contraste continua disponível separadamente do escuro.
-2. **0:45–2:15:** na janela normal, entrar como cidadão, cadastrar pedido fictício com PDF e copiar o protocolo gerado nesta execução.
-3. **2:15–3:00:** recarregar o acompanhamento; abrir `/admin` como cidadão e mostrar a saída para a comunidade.
-4. **3:00–5:00:** na janela privada, entrar como gestor, localizar o mesmo protocolo em Demandas e despachar com prioridade, setor, responsável e nota.
-5. **5:00–6:30:** criar/atualizar a OS prevista para a categoria e concluir seguindo as transições e obrigações do sistema. Se faltar uma etapa obrigatória, mostrar a mensagem e cumprir a etapa.
-6. **6:30–7:15:** voltar ao cidadão, atualizar o acompanhamento e conferir o histórico público e a solução.
-7. **7:15–8:00:** parar com Ctrl+C, iniciar novamente com `npm.cmd start` e reabrir o protocolo e o PDF.
-
-Prepare os acessos em particular com o [guia local](ACESSOS_LOCAIS.md). Não abra o arquivo de senhas enquanto compartilha a tela. O protocolo `EDU-2026-000003` é evidência histórica; use o protocolo recém-gerado na demonstração.
+Se o site exibir uma página offline, confira o servidor e mantenha o mesmo endereço `127.0.0.1:3001`. Não limpe o banco. O teste de funcionamento completo no Windows está descrito em [Como testar](COMO_TESTAR_NO_WINDOWS.md).
